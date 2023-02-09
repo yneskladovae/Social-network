@@ -1,0 +1,12 @@
+.friend img {
+    max-width: 77px;
+}
+
+.friend {
+    display: block;
+}
+
+.friend h2 {
+    margin: 0;
+    padding: 12px 0;
+}

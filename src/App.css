@@ -1,0 +1,13 @@
+.app-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    gap: 0 10px;
+}
+
+.app-content {
+    flex-basis: 70%;
+}
