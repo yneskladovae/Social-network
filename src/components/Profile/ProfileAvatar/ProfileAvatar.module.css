@@ -1,0 +1,16 @@
+.content {
+    /*background-color: lightblue;*/
+    /*flex-basis: 70%;*/
+}
+
+/*.content__bgImg {*/
+/*    max-width: 100%;*/
+/*}*/
+
+.content__avatar img {
+    display: block;
+    border-radius: 100px;
+    margin: -165px auto 0;
+    box-sizing: border-box;
+    cursor: pointer;
+}

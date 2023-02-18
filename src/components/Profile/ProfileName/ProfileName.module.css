@@ -1,0 +1,17 @@
+.content {
+    /*background-color: lightblue;*/
+    /*flex-basis: 70%;*/
+}
+
+/*.content__bgImg {*/
+/*    max-width: 100%;*/
+/*}*/
+
+.content__avatar__name {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    color: #2E3A59;
+    margin: 0;
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+.content__info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.content__info div {
+    margin-top: 20px;
+}
+
+.content__info div h4 {
+    border-bottom: 2px solid #add9e6;
+    padding-bottom: 3px;
+    display: inline-block;
+}
+
+.content__info div p:last-child {
+    margin-bottom: 0;
+}
+
+.content__info__title {
+    width: 90px;
+    display: inline-block;
+}
+
+.content__info h4 {
+    margin: 0;
+    border-bottom: 2px solid #add9e6;
+    padding-bottom: 3px;
+    display: inline-flex;
+}
+
+.content__info img {
+    margin-left: 5px;
+    cursor: pointer;
+}
