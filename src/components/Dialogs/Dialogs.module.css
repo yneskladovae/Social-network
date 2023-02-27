@@ -1,10 +1,14 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 1fr 11fr;
 }
 
 .dialogs__items {
     padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    height: max-content;
+    background-color: #f5f7fb;
 }
 
 .dialogs__items .active {
@@ -20,5 +24,184 @@
 }
 
 .dialog {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.dialog a {
+    margin-bottom: 8px;
+}
+
+.dialog img{
+    max-width: 69px;
+}
+
+
+/*-----------------------------------*/
+
+/*.message {*/
+/*    margin-bottom: 20px;*/
+/*}*/
+
+.imageAndText {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: end;
+}
+
+.imageAndText img {
+    width: 48px;
+}
+
+.text {
+    font-family: 'Montserrat', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    /*color: #FFFFFF;*/
+    color: #2E3A59;
+    /*background: #0066CC;*/
+    border: 2px solid #add9e6;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.text:after {
+
+}
+
+.name {
+    font-family: 'Montserrat', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    /*color: #FFFFFF;*/
+    color: #2E3A59;
+    text-align: right;
+}
+
+.messageText, .friendMessageText {
+    overflow-wrap: anywhere;
+    white-space: normal;
+    max-width: 390px;
+}
+
+.time {
+    font-family: 'Montserrat', serif;
+    text-align: right;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 600;
+    position: relative;
+    right: 10px;
+}
+
+.friendMessage {
+
+}
+
+.friendImageAndText {
+    display: flex;
+    align-items: center;
+    align-items: end;
+}
+
+.friendImageAndText img {
+    width: 48px;
+}
+
+.friendText {
+    font-family: 'Montserrat', serif;
+    /*color: #000000;*/
+    color: #2E3A59;
+    /*background: #F5F7FB;*/
+    border: 2px solid #cecccc;
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.friendText:after {
+
+}
+
+.friendName {
+    font-family: 'Montserrat', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    /*color: #000000;*/
+    color: #2E3A59;
+}
+
+.friendMessageText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.friendTime {
+    font-family: 'Montserrat', serif;
+    text-align: left;
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 600;
+    position: relative;
+    left: 10px;
+}
+
+.sendForm {
+    /*display: flex;*/
+    align-items: center;
+    margin-top: 60px;
+}
+
+.textarea {
+    overflow: hidden;
+    box-shadow: 0px 5px 20px rgb(29 33 38 / 3%), 0px 1px 2px rgb(29 33 38 / 10%);
+    height: 55px;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    box-sizing: border-box;
+    margin: 0 auto;
+    min-height: 121px;
+    border: 2px solid #ADD9E6;
+    border-radius: 5px;
+    resize: none;
+}
+
+.button {
+    /*width: 120px;*/
+    /*height: 55px;*/
+    /*border: none;*/
+    /*border-radius: 20px;*/
+    /*background-color: #add9e6;*/
+    /*color: #FFFFFF;*/
+    /*cursor: pointer;*/
+    padding: 10px 20px;
+    background: #ADD9E6;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #1984f0;
+}
+
+.button:active {
+    background-color: #0067;
 
 }

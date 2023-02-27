@@ -5,7 +5,11 @@ import u3 from "./img/u3.png"
 import u4 from "./img/u4.png"
 import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
+// import {rerenderEntireTree} from "../render";
 
+let rerenderEntireTree = (props: StateType) => {
+
+}
 
 export type MessageType = {
     id: string
@@ -19,6 +23,7 @@ export type PostType = {
     id: string
     message: string
     likesCount: number
+    date: string
 }
 export type SidebarDataType = {
     id: string
@@ -27,10 +32,12 @@ export type SidebarDataType = {
 }
 export type ProfilePageType = {
     postData: PostType[]
+    newPostText: string
 }
 export type DialogsPageType = {
     dialogsData: DialogsType[]
     messagesData: MessageType[]
+    newMessageText: string
 }
 export type SidebarFriendsType = {
     sidebarData: SidebarDataType[]
@@ -47,24 +54,38 @@ const state: StateType = {
             {
                 id: v1(),
                 message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt',
-                likesCount: 3
+                likesCount: 3,
+                date: "14:15 04.02.2023",
             },
             {
                 id: v1(),
                 message: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                likesCount: 4
+                likesCount: 4,
+                date: "16:24 03.02.2023",
             },
-            {id: v1(), message: 'Adipiscing elit, sed do eiusmod tempor incididunt.', likesCount: 3},
-            {id: v1(), message: 'Eiusmod tempor incididunt ut labore et dolore magna aliqua.', likesCount: 5},
+            {
+                id: v1(),
+                message: 'Adipiscing elit, sed do eiusmod tempor incididunt.',
+                likesCount: 3,
+                date: "10:17 31.01.2023"
+            },
+            {
+                id: v1(),
+                message: 'Eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                likesCount: 5,
+                date: "17:18 27.01.2023"
+            },
             {
                 id: v1(),
                 message: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                likesCount: 7
+                likesCount: 7,
+                date: "14:15 25.01.2023"
             },
         ],
+        newPostText: ''
     },
     dialogsPage: {
-        dialogsData: [
+         dialogsData: [
             {id: v1(), name: 'Dimych'},
             {id: v1(), name: 'Anna'},
             {id: v1(), name: 'Ighor'},
@@ -73,12 +94,9 @@ const state: StateType = {
             {id: v1(), name: 'Stas'},
         ],
         messagesData: [
-            {id: v1(), message: 'Hi'},
-            {id: v1(), message: 'Hello'},
-            {id: v1(), message: 'Hi'},
-            {id: v1(), message: 'Yo'},
-            {id: v1(), message: 'Yo'},
+            {id: v1(), message: 'Hello, she didn’t do anything and rested all day, how are you?'},
         ],
+        newMessageText: '',
     },
     sidebarFriends: {
         sidebarData: [
@@ -100,6 +118,43 @@ const state: StateType = {
             {id: v1(), name: "Lorenzo", src: u4},
         ]
     }
+}
+
+export const addPost = () => {
+    const newPost = {
+        id: v1(),
+        message: state.profilePage.newPostText,
+        likesCount: 0,
+        date: new Date().toLocaleString() + "",
+
+    }
+    state.profilePage.postData.push(newPost);
+    state.profilePage.newPostText = '';
+    rerenderEntireTree(state);
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export const addMessage = () => {
+    const newMessage = {
+        id: v1(),
+        message: state.dialogsPage.newMessageText,
+    }
+    state.dialogsPage.messagesData.push(newMessage);
+    state.dialogsPage.newMessageText = "";
+    rerenderEntireTree(state);
+}
+
+export const updateNewMessageText = (newText: string) => {
+    state.dialogsPage.newMessageText = newText;
+    rerenderEntireTree(state);
+}
+
+export let subscribe = (observer: (props: StateType) => void) => {
+    rerenderEntireTree = observer;
 }
 
 export default state;

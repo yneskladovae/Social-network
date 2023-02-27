@@ -4,7 +4,7 @@ import remove from "./img/remove.png"
 import like from "./img/like.png"
 import {PostType} from "../../../../redux/state";
 
-export const Post: React.FC<PostType> = ({message, id, likesCount}) => {
+export const Post: React.FC<PostType> = ({message, id, likesCount, date}) => {
     return (
         <div className={s.post__item} key={id}>
             <div className={s.post__item__container}>
@@ -13,7 +13,8 @@ export const Post: React.FC<PostType> = ({message, id, likesCount}) => {
                          src="https://cdn-icons-png.flaticon.com/512/147/147144.png" alt="img"/>
                     <div>
                         <p>Till Liberman</p>
-                        <p>14:15 04.02.2023</p>
+                        <p>{date}</p>
+                        {/*<p>14:15 04.02.2023</p>*/}
                         {/*<p>{new Date().toLocaleString() + ""}</p>*/}
                     </div>
                 </div>

@@ -1,18 +1,21 @@
 import s from "./Dialogs.module.css"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {DialogsPageType} from "../../redux/state";
+import {DialogsPageType, updateNewMessageText} from "../../redux/state";
 import React from "react";
 
-type DialogsPropsType = {
+export type DialogsPropsType = {
     dialogsPage: DialogsPageType
+    addMessage:() => void
+    updateNewMessageText:(newText: string) => void
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage}) => {
+export const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, addMessage, updateNewMessageText}) => {
+    console.log(dialogsPage)
     const dialogsElements = dialogsPage.dialogsData
         .map((dialog) => <Dialog name={dialog.name} id={dialog.id}/>)
-    const messagesElements = dialogsPage.messagesData
-        .map((message) => <Message message={message.message} id={message.id}/>)
+    // const messagesElements = dialogsPage.messagesData
+    //     .map((message) => <Message message={message.message} id={message.id}/>)
 
     return (
         <div className={s.dialogs}>
@@ -20,7 +23,13 @@ export const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage}) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {messagesElements}
+                {/*{messagesElements}*/}
+                <Message
+                    messagesData={dialogsPage.messagesData}
+                    addMessage={addMessage}
+                    newMessageText={dialogsPage.newMessageText}
+                    updateNewMessageText={updateNewMessageText}
+                />
             </div>
         </div>
     )

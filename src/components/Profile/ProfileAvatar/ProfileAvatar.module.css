@@ -3,9 +3,9 @@
     /*flex-basis: 70%;*/
 }
 
-/*.content__bgImg {*/
-/*    max-width: 100%;*/
-/*}*/
+.content__bgImg {
+    width: 100%;
+}
 
 .content__avatar img {
     display: block;

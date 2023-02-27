@@ -10,10 +10,14 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
-import {StateType} from "./redux/state";
+import {addMessage, addPost, StateType, updateNewMessageText, updateNewPostText} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
+    addPost: () => void
+    addMessage: () => void
+    updateNewPostText: (newText: string) => void
+    updateNewMessageText: (newText: string) => void
 }
 
 const App: React.FC<AppPropsType> = ({state}) => {
@@ -24,14 +28,12 @@ const App: React.FC<AppPropsType> = ({state}) => {
                 <div className={"flex-container"}>
                     <Navbar/>
                     <div className={"app-content"}>
-                        <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage}/>}/>
-                        <Route path={"/dialogs"} render={() => <Dialogs dialogsPage={state.dialogsPage}/>}/>
+                        <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} updateNewPostText={updateNewPostText} addPost={addPost}/>}/>
+                        <Route path={"/dialogs"} render={() => <Dialogs dialogsPage={state.dialogsPage} updateNewMessageText={updateNewMessageText} addMessage={addMessage}/>}/>
                         <Route path={"/news"} component={News}/>
                         <Route path={"/users"} component={Users}/>
                         <Route path={"/music"} component={Music}/>
                         <Route path={"/settings"} component={Settings}/>
-                        {/*<ProfileInfo/>*/}
-                        {/*<Dialog />*/}
                     </div>
                     <Friends sidebarData={state.sidebarFriends.sidebarData}/>
                 </div>

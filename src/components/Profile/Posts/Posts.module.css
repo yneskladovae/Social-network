@@ -37,7 +37,9 @@
     font-size: 18px;
     line-height: 21px;
     margin-top: 15px;
+    cursor: pointer;
 }
+
 .content__items__title {
     margin: 10px 0 20px 0;
     font-weight: 700;
@@ -47,4 +49,9 @@
     border-bottom: 2px solid #add9e6;
     display: inline-block;
     padding-bottom: 3px;
+}
+
+.posts__items {
+    display: flex;
+    flex-direction: column-reverse;
 }
