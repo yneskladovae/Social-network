@@ -1,31 +1,29 @@
 import s from "../Dialogs.module.css"
-import React, {useRef} from "react";
+import React, {ChangeEvent, useRef} from "react";
 import {DialogsPageType, MessageType} from "../../../redux/state";
 import {FriendMessage} from "./FriendMessage/FriendMessage";
 import {MyMessage} from "./MyMessage/MyMessage";
 
 export type MessagePropsType = {
     messagesData: MessageType[]
-    addMessage:() => void
-    updateNewMessageText:(newText: string) => void
-    newMessageText:string
+    addMessage: () => void
+    updateNewMessageText: (newText: string) => void
+    newMessageText: string
 }
 
-export const Message: React.FC<MessagePropsType> = ({messagesData, addMessage, newMessageText, updateNewMessageText}) => {
-
-    const newMyMessageEl = useRef<HTMLTextAreaElement>(null)
+export const Message: React.FC<MessagePropsType> = ({
+                                                        messagesData,
+                                                        addMessage,
+                                                        newMessageText,
+                                                        updateNewMessageText
+                                                    }) => {
 
     const addMessageHandler = () => {
-        if (newMyMessageEl.current !== null) {
-            addMessage();
-        }
+        addMessage();
     }
 
-    const onChangeUpdateMessageHandler = () => {
-        if (newMyMessageEl.current !== null) {
-            const text = newMyMessageEl.current.value
-            updateNewMessageText(text)
-        }
+    const onChangeUpdateMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        updateNewMessageText(e.currentTarget.value)
     }
 
     return (
@@ -57,8 +55,7 @@ export const Message: React.FC<MessagePropsType> = ({messagesData, addMessage, n
                 <MyMessage messagesData={messagesData}/>
             </div>
             <div className={s.sendForm}>
-                <textarea ref={newMyMessageEl}
-                          onChange={onChangeUpdateMessageHandler}
+                <textarea onChange={onChangeUpdateMessageHandler}
                           value={newMessageText}
                           className={s.textarea}
                           placeholder="Type your message">

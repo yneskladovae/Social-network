@@ -48,7 +48,7 @@ export type StateType = {
     sidebarFriends: SidebarFriendsType
 }
 
-const state: StateType = {
+let state: StateType = {
     profilePage: {
         postData: [
             {
@@ -85,7 +85,7 @@ const state: StateType = {
         newPostText: ''
     },
     dialogsPage: {
-         dialogsData: [
+        dialogsData: [
             {id: v1(), name: 'Dimych'},
             {id: v1(), name: 'Anna'},
             {id: v1(), name: 'Ighor'},
@@ -128,13 +128,15 @@ export const addPost = () => {
         date: new Date().toLocaleString() + "",
 
     }
-    state.profilePage.postData.push(newPost);
+    // state.profilePage.postData.push(newPost);
+    state = {...state, profilePage: {...state.profilePage, postData: [newPost, ...state.profilePage.postData]}}
     state.profilePage.newPostText = '';
     rerenderEntireTree(state);
 }
 
 export const updateNewPostText = (newText: string) => {
-    state.profilePage.newPostText = newText;
+    state = {...state, profilePage: {...state.profilePage, newPostText: newText}};
+    // state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 
@@ -143,17 +145,20 @@ export const addMessage = () => {
         id: v1(),
         message: state.dialogsPage.newMessageText,
     }
-    state.dialogsPage.messagesData.push(newMessage);
+    // state.dialogsPage.messagesData.push(newMessage);
+    state = {...state, dialogsPage: {...state.dialogsPage, messagesData: [...state.dialogsPage.messagesData, newMessage]}
+    }
     state.dialogsPage.newMessageText = "";
     rerenderEntireTree(state);
 }
 
 export const updateNewMessageText = (newText: string) => {
-    state.dialogsPage.newMessageText = newText;
+    state = {...state, dialogsPage: {...state.dialogsPage, newMessageText: newText}};
+    // state.dialogsPage.newMessageText = newText;
     rerenderEntireTree(state);
 }
 
-export let subscribe = (observer: (props: StateType) => void) => {
+export const subscribe = (observer: (props: StateType) => void) => {
     rerenderEntireTree = observer;
 }
 
