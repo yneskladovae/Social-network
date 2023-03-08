@@ -1,7 +1,7 @@
 import s from "./Dialogs.module.css"
 import {Dialog} from "./Dialog/Dialog";
 import {Message} from "./Message/Message";
-import {DialogsPageType, updateNewMessageText} from "../../redux/state";
+import {DialogsPageType} from "../../redux/state";
 import React from "react";
 
 export type DialogsPropsType = {
@@ -11,7 +11,6 @@ export type DialogsPropsType = {
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, addMessage, updateNewMessageText}) => {
-    console.log(dialogsPage)
     const dialogsElements = dialogsPage.dialogsData
         .map((dialog) => <Dialog name={dialog.name} id={dialog.id}/>)
     // const messagesElements = dialogsPage.messagesData

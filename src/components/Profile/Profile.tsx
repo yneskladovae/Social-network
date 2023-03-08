@@ -5,7 +5,7 @@ import {ProfileAvatar} from "./ProfileAvatar/ProfileAvatar";
 import {ProfileName} from "./ProfileName/ProfileName";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePageType, updateNewPostText} from "../../redux/state";
+import {ProfilePageType} from "../../redux/state";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
@@ -13,7 +13,7 @@ type ProfilePropsType = {
     updateNewPostText:(newText: string) => void
 }
 
-export const Profile: React.FC<ProfilePropsType> = ({profilePage, addPost}) => {
+export const Profile: React.FC<ProfilePropsType> = ({profilePage, addPost, updateNewPostText}) => {
     return (
         <div className={s.content}>
             <ProfileAvatar/>

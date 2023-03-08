@@ -10,7 +10,7 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
-import {addMessage, addPost, StateType, updateNewMessageText, updateNewPostText} from "./redux/state";
+import {StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
@@ -20,7 +20,7 @@ type AppPropsType = {
     updateNewMessageText: (newText: string) => void
 }
 
-const App: React.FC<AppPropsType> = ({state}) => {
+const App: React.FC<AppPropsType> = ({state, addMessage, addPost, updateNewPostText, updateNewMessageText}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">

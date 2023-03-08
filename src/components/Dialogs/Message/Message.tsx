@@ -1,6 +1,6 @@
 import s from "../Dialogs.module.css"
-import React, {ChangeEvent, useRef} from "react";
-import {DialogsPageType, MessageType} from "../../../redux/state";
+import React, {ChangeEvent} from "react";
+import {MessageType} from "../../../redux/state";
 import {FriendMessage} from "./FriendMessage/FriendMessage";
 import {MyMessage} from "./MyMessage/MyMessage";
 
