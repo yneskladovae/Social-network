@@ -1,25 +1,24 @@
 import React, {ChangeEvent, LegacyRef, RefObject, useRef} from "react";
 import s from "./Posts.module.css"
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/state";
+import {ActionsTypes, addPostActionCreator, PostType, UpdateNewPostTextActionCreator} from "../../../redux/state";
 
 export type PostPropsType = {
     postData: PostType[]
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
     newPostText: string
+    dispatch: (action: ActionsTypes) => void
 }
 
-export const Posts: React.FC<PostPropsType> = ({postData, addPost, newPostText, updateNewPostText}) => {
+export const Posts: React.FC<PostPropsType> = ({postData, newPostText, dispatch}) => {
     const postsElements = postData
         .map((post) => <Post id={post.id} message={post.message} likesCount={post.likesCount} date={post.date}/>)
 
     const addPostHandler = () => {
-        addPost();
+        dispatch(addPostActionCreator());
     }
 
     const onChangeUpdateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewPostText(e.currentTarget.value)
+        dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value));
     }
 
     return (

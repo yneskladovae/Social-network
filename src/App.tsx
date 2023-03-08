@@ -10,17 +10,14 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
-import {StateType} from "./redux/state";
+import {ActionsTypes, StateType} from "./redux/state";
 
 type AppPropsType = {
     state: StateType
-    addPost: () => void
-    addMessage: () => void
-    updateNewPostText: (newText: string) => void
-    updateNewMessageText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, addMessage, addPost, updateNewPostText, updateNewMessageText}) => {
+const App: React.FC<AppPropsType> = ({state, dispatch}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -28,8 +25,8 @@ const App: React.FC<AppPropsType> = ({state, addMessage, addPost, updateNewPostT
                 <div className={"flex-container"}>
                     <Navbar/>
                     <div className={"app-content"}>
-                        <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} updateNewPostText={updateNewPostText} addPost={addPost}/>}/>
-                        <Route path={"/dialogs"} render={() => <Dialogs dialogsPage={state.dialogsPage} updateNewMessageText={updateNewMessageText} addMessage={addMessage}/>}/>
+                        <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
+                        <Route path={"/dialogs"} render={() => <Dialogs dialogsPage={state.dialogsPage} dispatch={dispatch}/>}/>
                         <Route path={"/news"} component={News}/>
                         <Route path={"/users"} component={Users}/>
                         <Route path={"/music"} component={Music}/>

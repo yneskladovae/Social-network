@@ -5,22 +5,21 @@ import {ProfileAvatar} from "./ProfileAvatar/ProfileAvatar";
 import {ProfileName} from "./ProfileName/ProfileName";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ProfilePageType} from "../../redux/state";
+import {ActionsTypes, ProfilePageType} from "../../redux/state";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType
-    addPost:() => void
-    updateNewPostText:(newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
-export const Profile: React.FC<ProfilePropsType> = ({profilePage, addPost, updateNewPostText}) => {
+export const Profile: React.FC<ProfilePropsType> = ({profilePage, dispatch}) => {
     return (
         <div className={s.content}>
             <ProfileAvatar/>
             <ProfileName/>
             <ProfileStatus/>
             <ProfileInfo/>
-            <Posts postData={profilePage.postData} addPost={addPost} newPostText={profilePage.newPostText} updateNewPostText={updateNewPostText}/>
+            <Posts postData={profilePage.postData} newPostText={profilePage.newPostText} dispatch={dispatch}/>
         </div>
     );
 };

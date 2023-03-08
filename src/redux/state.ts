@@ -6,6 +6,7 @@ import u4 from "./img/u4.png"
 import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
 
+
 export type MessageType = {
     id: string
     message: string
@@ -44,14 +45,34 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType
-    getState: () => StateType
     _onChange: (props: StateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
     subscribe: (callback: (state: StateType) => void) => void
+    getState: () => StateType
+    // addPost: () => void
+    // updateNewPostText: (newText: string) => void
+    // addMessage: () => void
+    // updateNewMessageText: (newText: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
+
+
+type AddPostActionType = {
+    type: "ADD-POST"
+}
+type UpdateNewPostTextActionType = {
+    type: "UPDATE-NEW-POST-TEXT"
+    newText: string
+}
+type AddMessageActionType = {
+    type: "ADD-MESSAGE"
+
+}
+type UpdateNewMessageTextActionType = {
+    type: "UPDATE-NEW-MESSAGE-TEXT"
+    newText: string
+}
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType
 
 let store: StoreType = {
     _state: {
@@ -131,48 +152,92 @@ let store: StoreType = {
     _onChange(props: StateType) {
 
     },
-    addPost() {
-        const newPost = {
-            id: v1(),
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-            date: new Date().toLocaleString() + "",
-
-        }
-        this._state = {
-            ...this._state,
-            profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}
-        }
-        this._state.profilePage.newPostText = '';
-        this._onChange(this._state);
-    },
-    updateNewPostText(newText: string) {
-        this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: newText}};
-        this._onChange(this._state);
-    },
-    addMessage() {
-        const newMessage = {
-            id: v1(),
-            message: this._state.dialogsPage.newMessageText,
-        }
-        this._state = {
-            ...this._state,
-            dialogsPage: {
-                ...this._state.dialogsPage,
-                messagesData: [...this._state.dialogsPage.messagesData, newMessage]
-            }
-        }
-        this._state.dialogsPage.newMessageText = "";
-        this._onChange(this._state);
-    },
-    updateNewMessageText(newText: string) {
-        this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: newText}};
-        // state.dialogsPage.newMessageText = newText;
-        this._onChange(this._state);
-    },
     subscribe(callback) {
         this._onChange = callback;
     },
+    // addPost() {
+    //     const newPost = {
+    //         id: v1(),
+    //         message: this._state.profilePage.newPostText,
+    //         likesCount: 0,
+    //         date: new Date().toLocaleString() + "",
+    //
+    //     }
+    //     this._state = {...this._state, profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}}
+    //     this._state.profilePage.newPostText = '';
+    //     this._onChange(this._state);
+    // },
+    // updateNewPostText(newText: string) {
+    //     this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: newText}};
+    //     this._onChange(this._state);
+    // },
+    // addMessage() {
+    //     const newMessage = {
+    //         id: v1(),
+    //         message: this._state.dialogsPage.newMessageText,
+    //     }
+    //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messagesData: [...this._state.dialogsPage.messagesData, newMessage]}}
+    //     this._state.dialogsPage.newMessageText = "";
+    //     this._onChange(this._state);
+    // },
+    // updateNewMessageText(newText: string) {
+    //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: newText}};
+    //     this._onChange(this._state);
+    // },
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost = {
+                id: v1(),
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+                date: new Date().toLocaleString() + "",
+
+            }
+            this._state = {...this._state, profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}
+            }
+            this._state.profilePage.newPostText = '';
+            this._onChange(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: action.newText}};
+            this._onChange(this._state);
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newMessage = {
+                id: v1(),
+                message: this._state.dialogsPage.newMessageText,
+            }
+            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messagesData: [...this._state.dialogsPage.messagesData, newMessage]}
+            }
+            this._state.dialogsPage.newMessageText = "";
+            this._onChange(this._state);
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: action.newText}};
+            this._onChange(this._state);
+        }
+    }
+}
+
+export const addPostActionCreator = ():AddPostActionType => {
+    return {
+        type: "ADD-POST",
+    }
+}
+export const UpdateNewPostTextActionCreator = (newText: string):UpdateNewPostTextActionType => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        newText: newText,
+    }
+}
+
+export const addMessageActionCreator = ():AddMessageActionType => {
+    return {
+        type: "ADD-MESSAGE",
+    }
+}
+export const UpdateNewMessageTextActionCreator = (newText: string):UpdateNewMessageTextActionType => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-TEXT",
+        newText: newText,
+    }
 }
 
 export default store;

@@ -1,29 +1,32 @@
 import s from "../Dialogs.module.css"
 import React, {ChangeEvent} from "react";
-import {MessageType} from "../../../redux/state";
+import {
+    ActionsTypes,
+    addMessageActionCreator,
+    MessageType,
+    UpdateNewMessageTextActionCreator
+} from "../../../redux/state";
 import {FriendMessage} from "./FriendMessage/FriendMessage";
 import {MyMessage} from "./MyMessage/MyMessage";
 
 export type MessagePropsType = {
     messagesData: MessageType[]
-    addMessage: () => void
-    updateNewMessageText: (newText: string) => void
     newMessageText: string
+    dispatch: (action: ActionsTypes) => void
 }
 
 export const Message: React.FC<MessagePropsType> = ({
                                                         messagesData,
-                                                        addMessage,
                                                         newMessageText,
-                                                        updateNewMessageText
+                                                        dispatch,
                                                     }) => {
 
     const addMessageHandler = () => {
-        addMessage();
+        dispatch(addMessageActionCreator());
     }
 
     const onChangeUpdateMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        updateNewMessageText(e.currentTarget.value)
+        dispatch(UpdateNewMessageTextActionCreator(e.currentTarget.value));
     }
 
     return (
