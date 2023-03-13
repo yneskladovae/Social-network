@@ -5,7 +5,8 @@ import u3 from "./img/u3.png"
 import u4 from "./img/u4.png"
 import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
-
+import profileReducer from "./profile-reducer";
+import dialogsReducer from "./dialogs-reducer";
 
 export type MessageType = {
     id: string
@@ -48,26 +49,21 @@ export type StoreType = {
     _onChange: (props: StateType) => void
     subscribe: (callback: (state: StateType) => void) => void
     getState: () => StateType
-    // addPost: () => void
-    // updateNewPostText: (newText: string) => void
-    // addMessage: () => void
-    // updateNewMessageText: (newText: string) => void
     dispatch: (action: ActionsTypes) => void
 }
 
-
-type AddPostActionType = {
+export type AddPostActionType = {
     type: "ADD-POST"
 }
-type UpdateNewPostTextActionType = {
+export type UpdateNewPostTextActionType = {
     type: "UPDATE-NEW-POST-TEXT"
     newText: string
 }
-type AddMessageActionType = {
+export type AddMessageActionType = {
     type: "ADD-MESSAGE"
 
 }
-type UpdateNewMessageTextActionType = {
+export type UpdateNewMessageTextActionType = {
     type: "UPDATE-NEW-MESSAGE-TEXT"
     newText: string
 }
@@ -155,64 +151,38 @@ let store: StoreType = {
     subscribe(callback) {
         this._onChange = callback;
     },
-    // addPost() {
-    //     const newPost = {
-    //         id: v1(),
-    //         message: this._state.profilePage.newPostText,
-    //         likesCount: 0,
-    //         date: new Date().toLocaleString() + "",
-    //
-    //     }
-    //     this._state = {...this._state, profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}}
-    //     this._state.profilePage.newPostText = '';
-    //     this._onChange(this._state);
-    // },
-    // updateNewPostText(newText: string) {
-    //     this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: newText}};
-    //     this._onChange(this._state);
-    // },
-    // addMessage() {
-    //     const newMessage = {
-    //         id: v1(),
-    //         message: this._state.dialogsPage.newMessageText,
-    //     }
-    //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messagesData: [...this._state.dialogsPage.messagesData, newMessage]}}
-    //     this._state.dialogsPage.newMessageText = "";
-    //     this._onChange(this._state);
-    // },
-    // updateNewMessageText(newText: string) {
-    //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: newText}};
-    //     this._onChange(this._state);
-    // },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost = {
-                id: v1(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0,
-                date: new Date().toLocaleString() + "",
 
-            }
-            this._state = {...this._state, profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}
-            }
-            this._state.profilePage.newPostText = '';
-            this._onChange(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: action.newText}};
-            this._onChange(this._state);
-        } else if (action.type === 'ADD-MESSAGE') {
-            const newMessage = {
-                id: v1(),
-                message: this._state.dialogsPage.newMessageText,
-            }
-            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messagesData: [...this._state.dialogsPage.messagesData, newMessage]}
-            }
-            this._state.dialogsPage.newMessageText = "";
-            this._onChange(this._state);
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: action.newText}};
-            this._onChange(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._onChange(this._state);
+        // if (action.type === 'ADD-POST') {
+        //     const newPost = {
+        //         id: v1(),
+        //         message: this._state.profilePage.newPostText,
+        //         likesCount: 0,
+        //         date: new Date().toLocaleString() + "",
+        //     }
+        //     this._state = {...this._state, profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}
+        //     }
+        //     this._state.profilePage.newPostText = '';
+        //     this._onChange(this._state);
+        // } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+        //     this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: action.newText}};
+        //     this._onChange(this._state);
+        // } else if (action.type === 'ADD-MESSAGE') {
+        //     const newMessage = {
+        //         id: v1(),
+        //         message: this._state.dialogsPage.newMessageText,
+        //     }
+        //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messagesData: [...this._state.dialogsPage.messagesData, newMessage]}
+        //     }
+        //     this._state.dialogsPage.newMessageText = "";
+        //     this._onChange(this._state);
+        // } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+        //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: action.newText}};
+        //     this._onChange(this._state);
+        // }
     }
 }
 
@@ -227,7 +197,6 @@ export const UpdateNewPostTextActionCreator = (newText: string):UpdateNewPostTex
         newText: newText,
     }
 }
-
 export const addMessageActionCreator = ():AddMessageActionType => {
     return {
         type: "ADD-MESSAGE",
