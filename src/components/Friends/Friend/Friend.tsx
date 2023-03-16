@@ -7,7 +7,7 @@ import u4 from "./img/u4.png"
 import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
 
-import {SidebarDataType, SidebarFriendsType} from "../../../redux/state";
+import {SidebarDataType, SidebarFriendsType} from "../../../redux/store";
 
 export const Friend: React.FC<SidebarFriendsType> = ({sidebarData}) => {
     const friendsElements = sidebarData.map((el: SidebarDataType) =>

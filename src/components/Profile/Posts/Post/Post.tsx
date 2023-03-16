@@ -2,7 +2,7 @@ import React from "react";
 import s from "./Post.module.css"
 import remove from "./img/remove.png"
 import like from "./img/like.png"
-import {PostType} from "../../../../redux/state";
+import {PostType} from "../../../../redux/store";
 
 export const Post: React.FC<PostType> = ({message, id, likesCount, date}) => {
     return (

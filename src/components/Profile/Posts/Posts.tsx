@@ -1,7 +1,11 @@
 import React, {ChangeEvent, LegacyRef, RefObject, useRef} from "react";
 import s from "./Posts.module.css"
 import {Post} from "./Post/Post";
-import {ActionsTypes, addPostActionCreator, PostType, UpdateNewPostTextActionCreator} from "../../../redux/state";
+import {
+    ActionsTypes, addPostActionCreator,
+    PostType,
+    updateNewPostTextActionCreator,
+} from "../../../redux/store";
 
 export type PostPropsType = {
     postData: PostType[]
@@ -18,7 +22,7 @@ export const Posts: React.FC<PostPropsType> = ({postData, newPostText, dispatch}
     }
 
     const onChangeUpdateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(UpdateNewPostTextActionCreator(e.currentTarget.value));
+        dispatch(updateNewPostTextActionCreator(e.currentTarget.value));
     }
 
     return (

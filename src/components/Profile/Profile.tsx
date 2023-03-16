@@ -5,7 +5,7 @@ import {ProfileAvatar} from "./ProfileAvatar/ProfileAvatar";
 import {ProfileName} from "./ProfileName/ProfileName";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsTypes, ProfilePageType} from "../../redux/state";
+import {ActionsTypes, ProfilePageType} from "../../redux/store";
 
 type ProfilePropsType = {
     profilePage: ProfilePageType

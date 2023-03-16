@@ -1,7 +1,7 @@
 import React from "react";
 import s from './Friends.module.css'
 import {Friend} from "./Friend/Friend";
-import {SidebarFriendsType} from "../../redux/state";
+import {SidebarFriendsType} from "../../redux/store";
 
 export const Friends: React.FC<SidebarFriendsType> = ({sidebarData}) => {
     return (

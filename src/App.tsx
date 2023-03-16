@@ -10,7 +10,7 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
-import {ActionsTypes, StateType} from "./redux/state";
+import {ActionsTypes, StateType} from "./redux/store";
 
 type AppPropsType = {
     state: StateType

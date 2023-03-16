@@ -7,6 +7,7 @@ import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";
 
 export type MessageType = {
     id: string
@@ -46,12 +47,15 @@ export type StateType = {
 }
 export type StoreType = {
     _state: StateType
-    _onChange: (props: StateType) => void
+    _callSubscriber: (props: StateType) => void
     subscribe: (callback: (state: StateType) => void) => void
     getState: () => StateType
     dispatch: (action: ActionsTypes) => void
 }
 
+export type sidebarActionType = {
+    type: "FRIENDS-SIDEBAR"
+}
 export type AddPostActionType = {
     type: "ADD-POST"
 }
@@ -68,7 +72,7 @@ export type UpdateNewMessageTextActionType = {
     newText: string
 }
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType | sidebarActionType
 
 let store: StoreType = {
     _state: {
@@ -145,44 +149,23 @@ let store: StoreType = {
     getState() {
         return this._state;
     },
-    _onChange(props: StateType) {
+    _callSubscriber(props: StateType) {
 
     },
     subscribe(callback) {
-        this._onChange = callback;
+        this._callSubscriber = callback;
     },
     dispatch(action) {
-
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-        this._onChange(this._state);
-        // if (action.type === 'ADD-POST') {
-        //     const newPost = {
-        //         id: v1(),
-        //         message: this._state.profilePage.newPostText,
-        //         likesCount: 0,
-        //         date: new Date().toLocaleString() + "",
-        //     }
-        //     this._state = {...this._state, profilePage: {...this._state.profilePage, postData: [newPost, ...this._state.profilePage.postData]}
-        //     }
-        //     this._state.profilePage.newPostText = '';
-        //     this._onChange(this._state);
-        // } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-        //     this._state = {...this._state, profilePage: {...this._state.profilePage, newPostText: action.newText}};
-        //     this._onChange(this._state);
-        // } else if (action.type === 'ADD-MESSAGE') {
-        //     const newMessage = {
-        //         id: v1(),
-        //         message: this._state.dialogsPage.newMessageText,
-        //     }
-        //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, messagesData: [...this._state.dialogsPage.messagesData, newMessage]}
-        //     }
-        //     this._state.dialogsPage.newMessageText = "";
-        //     this._onChange(this._state);
-        // } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-        //     this._state = {...this._state, dialogsPage: {...this._state.dialogsPage, newMessageText: action.newText}};
-        //     this._onChange(this._state);
-        // }
+        this._state.sidebarFriends = sidebarReducer(this._state.sidebarFriends, action);
+        this._callSubscriber(this._state);
+    }
+}
+
+export const sidebarActionCreator = ():sidebarActionType => {
+    return {
+        type: "FRIENDS-SIDEBAR",
     }
 }
 
@@ -191,7 +174,7 @@ export const addPostActionCreator = ():AddPostActionType => {
         type: "ADD-POST",
     }
 }
-export const UpdateNewPostTextActionCreator = (newText: string):UpdateNewPostTextActionType => {
+export const updateNewPostTextActionCreator = (newText: string):UpdateNewPostTextActionType => {
     return {
         type: "UPDATE-NEW-POST-TEXT",
         newText: newText,
@@ -202,7 +185,7 @@ export const addMessageActionCreator = ():AddMessageActionType => {
         type: "ADD-MESSAGE",
     }
 }
-export const UpdateNewMessageTextActionCreator = (newText: string):UpdateNewMessageTextActionType => {
+export const updateNewMessageTextActionCreator = (newText: string):UpdateNewMessageTextActionType => {
     return {
         type: "UPDATE-NEW-MESSAGE-TEXT",
         newText: newText,

@@ -3,9 +3,8 @@ import React, {ChangeEvent} from "react";
 import {
     ActionsTypes,
     addMessageActionCreator,
-    MessageType,
-    UpdateNewMessageTextActionCreator
-} from "../../../redux/state";
+    MessageType, updateNewMessageTextActionCreator
+} from "../../../redux/store";
 import {FriendMessage} from "./FriendMessage/FriendMessage";
 import {MyMessage} from "./MyMessage/MyMessage";
 
@@ -26,7 +25,7 @@ export const Message: React.FC<MessagePropsType> = ({
     }
 
     const onChangeUpdateMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(UpdateNewMessageTextActionCreator(e.currentTarget.value));
+        dispatch(updateNewMessageTextActionCreator(e.currentTarget.value));
     }
 
     return (
