@@ -1,4 +1,4 @@
-import {ActionsTypes, DialogsPageType, StateType} from "./store";
+import {ActionsTypes, DialogsPageType} from "./store";
 import {v1} from "uuid";
 
 const initialState = {
@@ -16,7 +16,7 @@ const initialState = {
     newMessageText: '',
 }
 
-const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes) => {
+const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTypes): DialogsPageType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newMessage = {

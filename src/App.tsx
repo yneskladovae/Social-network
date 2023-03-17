@@ -10,14 +10,15 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
-import {ActionsTypes, StateType} from "./redux/store";
+import {ActionsTypes, StateType, StoreType} from "./redux/store";
 
 type AppPropsType = {
     state: StateType
+    store: StoreType
     dispatch: (action: ActionsTypes) => void
 }
 
-const App: React.FC<AppPropsType> = ({state, dispatch}) => {
+const App: React.FC<AppPropsType> = ({state,store ,dispatch}) => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -25,8 +26,9 @@ const App: React.FC<AppPropsType> = ({state, dispatch}) => {
                 <div className={"flex-container"}>
                     <Navbar/>
                     <div className={"app-content"}>
-                        <Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>
-                        <Route path={"/dialogs"} render={() => <Dialogs dialogsPage={state.dialogsPage} dispatch={dispatch}/>}/>
+                        {/*<Route path={"/profile"} render={() => <Profile profilePage={state.profilePage} dispatch={dispatch}/>}/>*/}
+                        <Route path={"/profile"} render={() => <Profile store={store}/>}/>
+                        <Route path={"/dialogs"} render={() => <Dialogs store={store}/>}/>
                         <Route path={"/news"} component={News}/>
                         <Route path={"/users"} component={Users}/>
                         <Route path={"/music"} component={Music}/>

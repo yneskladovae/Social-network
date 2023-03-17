@@ -1,28 +1,25 @@
-import React, {ChangeEvent, LegacyRef, RefObject, useRef} from "react";
+import React, {ChangeEvent} from "react";
 import s from "./Posts.module.css"
 import {Post} from "./Post/Post";
-import {
-    ActionsTypes, addPostActionCreator,
-    PostType,
-    updateNewPostTextActionCreator,
-} from "../../../redux/store";
+import {PostType} from "../../../redux/store";
 
 export type PostPropsType = {
     postData: PostType[]
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    updateNewPost: (text: string) => void
+    addPost: () => void
 }
 
-export const Posts: React.FC<PostPropsType> = ({postData, newPostText, dispatch}) => {
+export const Posts: React.FC<PostPropsType> = ({postData, newPostText, updateNewPost, addPost}) => {
     const postsElements = postData
         .map((post) => <Post id={post.id} message={post.message} likesCount={post.likesCount} date={post.date}/>)
 
     const addPostHandler = () => {
-        dispatch(addPostActionCreator());
+        addPost();
     }
 
-    const onChangeUpdateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(updateNewPostTextActionCreator(e.currentTarget.value));
+    const updateNewPostHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        updateNewPost(e.currentTarget.value)
     }
 
     return (
@@ -30,7 +27,7 @@ export const Posts: React.FC<PostPropsType> = ({postData, newPostText, dispatch}
             <div className={s.content__items}>
                 <h4 className={s.content__title}>My posts</h4>
                 <textarea
-                    onChange={onChangeUpdateNewPostHandler}
+                    onChange={updateNewPostHandler}
                     value={newPostText}
                     placeholder="Whats in your mind today?"
                     className={s.content__textarea}

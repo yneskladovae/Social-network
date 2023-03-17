@@ -1,19 +1,17 @@
 import s from "./Dialogs.module.css"
 import {Dialog} from "./Dialog/Dialog";
-import {Message} from "./Message/Message";
-import {ActionsTypes, DialogsPageType} from "../../redux/store";
+import {StoreType} from "../../redux/store";
 import React from "react";
+import {MessageContainer} from "./Message/MessageContainer";
 
 export type DialogsPropsType = {
-    dialogsPage: DialogsPageType
-    dispatch: (action: ActionsTypes) => void
+    store: StoreType
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, dispatch}) => {
-    const dialogsElements = dialogsPage.dialogsData
+export const Dialogs: React.FC<DialogsPropsType> = ({store}) => {
+    const state = store.getState().dialogsPage
+    const dialogsElements = state.dialogsData
         .map((dialog) => <Dialog name={dialog.name} id={dialog.id}/>)
-    // const messagesElements = dialogsPage.messagesData
-    //     .map((message) => <Message message={message.message} id={message.id}/>)
 
     return (
         <div className={s.dialogs}>
@@ -21,12 +19,7 @@ export const Dialogs: React.FC<DialogsPropsType> = ({dialogsPage, dispatch}) => 
                 {dialogsElements}
             </div>
             <div className={s.messages}>
-                {/*{messagesElements}*/}
-                <Message
-                    messagesData={dialogsPage.messagesData}
-                    newMessageText={dialogsPage.newMessageText}
-                    dispatch={dispatch}
-                />
+                <MessageContainer store={store}/>
             </div>
         </div>
     )

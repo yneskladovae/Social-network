@@ -28,7 +28,7 @@ const initialState = {
     ]
 }
 
-const sidebarReducer = (state: SidebarFriendsType = initialState, action: ActionsTypes) => {
+const sidebarReducer = (state: SidebarFriendsType = initialState, action: ActionsTypes): SidebarFriendsType => {
     return state
 }
 

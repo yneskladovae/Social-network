@@ -5,21 +5,22 @@ import {ProfileAvatar} from "./ProfileAvatar/ProfileAvatar";
 import {ProfileName} from "./ProfileName/ProfileName";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {ActionsTypes, ProfilePageType} from "../../redux/store";
+import {StoreType} from "../../redux/store";
+import {PostsContainer} from "./Posts/PostsContainer";
 
 type ProfilePropsType = {
-    profilePage: ProfilePageType
-    dispatch: (action: ActionsTypes) => void
+    store: StoreType
 }
 
-export const Profile: React.FC<ProfilePropsType> = ({profilePage, dispatch}) => {
+export const Profile: React.FC<ProfilePropsType> = ({store}) => {
     return (
         <div className={s.content}>
             <ProfileAvatar/>
             <ProfileName/>
             <ProfileStatus/>
             <ProfileInfo/>
-            <Posts postData={profilePage.postData} newPostText={profilePage.newPostText} dispatch={dispatch}/>
+            {/*<Posts postData={profilePage.postData} newPostText={profilePage.newPostText} dispatch={dispatch}/>*/}
+            <PostsContainer store={store}/>
         </div>
     );
 };

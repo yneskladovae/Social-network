@@ -37,7 +37,7 @@ const initialState = {
     newPostText: ''
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
+const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
         case 'ADD-POST':
             const newPost = {
@@ -48,10 +48,12 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             }
             state = {...state, postData: [newPost, ...state.postData]}
             state.newPostText = '';
-            break;
+            return state;
+            // break;
         case 'UPDATE-NEW-POST-TEXT':
             state = {...state, newPostText: action.newText};
-            break;
+            return state;
+            // break;
     }
     return state;
 }

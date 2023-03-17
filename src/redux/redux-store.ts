@@ -11,6 +11,3 @@ let reducers = combineReducers({
 })
 
 export const store: StoreType = createStore(reducers)
-
-
-
