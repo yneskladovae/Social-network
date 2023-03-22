@@ -29,7 +29,11 @@ const initialState = {
 }
 
 const sidebarReducer = (state: SidebarFriendsType = initialState, action: ActionsTypes): SidebarFriendsType => {
-    return state
+    switch (action.type) {
+        case 'FRIENDS-SIDEBAR':
+            return state;
+    }
+    return state;
 }
 
 export const sidebarActionCreator = () => {
