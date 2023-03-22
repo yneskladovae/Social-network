@@ -1,17 +1,16 @@
 import React, {ChangeEvent} from "react";
 import s from "./Posts.module.css"
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/store";
+import {InitialStateType} from "../../../redux/profile-reducer";
 
 export type PostPropsType = {
-    postData: PostType[]
-    newPostText: string
+    profilePage: InitialStateType
     updateNewPost: (text: string) => void
     addPost: () => void
 }
 
-export const Posts: React.FC<PostPropsType> = ({postData, newPostText, updateNewPost, addPost}) => {
-    const postsElements = postData
+export const Posts: React.FC<PostPropsType> = ({profilePage, updateNewPost, addPost}) => {
+    const postsElements = profilePage.postData
         .map((post) => <Post id={post.id} message={post.message} likesCount={post.likesCount} date={post.date}/>)
 
     const addPostHandler = () => {
@@ -28,7 +27,7 @@ export const Posts: React.FC<PostPropsType> = ({postData, newPostText, updateNew
                 <h4 className={s.content__title}>My posts</h4>
                 <textarea
                     onChange={updateNewPostHandler}
-                    value={newPostText}
+                    value={profilePage.newPostText}
                     placeholder="Whats in your mind today?"
                     className={s.content__textarea}
                 />

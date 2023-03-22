@@ -5,9 +5,6 @@ import u3 from "./img/u3.png"
 import u4 from "./img/u4.png"
 import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
-import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
-import sidebarReducer, {sidebarActionCreator} from "./sidebar-reducer";
 
 export type MessageType = {
     id: string
@@ -58,6 +55,39 @@ export type ActionsTypes = ReturnType<typeof sidebarActionCreator>
     | ReturnType<typeof updateNewMessageTextActionCreator>
     | ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
+
+export const sidebarActionCreator = () => {
+    return {
+        type: "FRIENDS-SIDEBAR",
+    } as const
+}
+export const addPostActionCreator = () => {
+    return {
+        type: "ADD-POST",
+    } as const
+}
+
+export const updateNewPostTextActionCreator = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-POST-TEXT",
+        payload: {
+            newText
+        } as const
+    }
+}
+export const addMessageActionCreator = () => {
+    return {
+        type: "ADD-MESSAGE",
+    } as const
+}
+export const updateNewMessageTextActionCreator = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-TEXT",
+        payload: {
+            newText
+        }
+    } as const
+}
 
 let store: StoreType = {
     _state: {
@@ -141,9 +171,9 @@ let store: StoreType = {
         this._callSubscriber = callback;
     },
     dispatch(action) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
-        this._state.sidebarFriends = sidebarReducer(this._state.sidebarFriends, action);
+        // this._state.profilePage = profileReducer(this._state.profilePage, action);
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        // this._state.sidebarFriends = sidebarReducer(this._state.sidebarFriends, action);
         this._callSubscriber(this._state);
     }
 }

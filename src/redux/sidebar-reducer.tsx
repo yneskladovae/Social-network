@@ -1,4 +1,3 @@
-import {ActionsTypes, SidebarFriendsType} from "./store";
 import {v1} from "uuid";
 import u1 from "./img/u1.png";
 import u2 from "./img/u2.png";
@@ -7,7 +6,17 @@ import u4 from "./img/u4.png";
 import u5 from "./img/u5.png";
 import u6 from "./img/u6.png";
 
-const initialState = {
+export type InitialStateType = {
+    sidebarData: SidebarDataType[]
+}
+
+export type SidebarDataType = {
+    id: string
+    name: string
+    src: string
+}
+
+const initialState: InitialStateType = {
     sidebarData: [
         {id: v1(), name: "Anna", src: u1},
         {id: v1(), name: "Denis", src: u2},
@@ -28,13 +37,15 @@ const initialState = {
     ]
 }
 
-const sidebarReducer = (state: SidebarFriendsType = initialState, action: ActionsTypes): SidebarFriendsType => {
+const sidebarReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case 'FRIENDS-SIDEBAR':
             return state;
     }
     return state;
 }
+
+export type ActionsTypes = ReturnType<typeof sidebarActionCreator>
 
 export const sidebarActionCreator = () => {
     return {

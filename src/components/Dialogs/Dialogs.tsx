@@ -12,8 +12,11 @@ export const Dialogs: React.FC<DialogsPropsType> = () => {
     //     .map((dialog) => <Dialog name={dialog.name} id={dialog.id}/>)
 
     return (
+        // {/*<div className={s.dialogs__items}>*/}
+        // {/*    {dialogsElements}*/}
+        // {/*</div>*/}
         <div className={s.dialogs}>
-            <MessageContainer/>
+                <MessageContainer/>
         </div>
     )
 }

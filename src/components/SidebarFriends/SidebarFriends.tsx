@@ -6,7 +6,12 @@ import {SidebarFriendsContainer} from "./SidebarFriendsContainer";
 export const SidebarFriends = () => {
     return (
         <div className={s.friends}>
-            <SidebarFriendsContainer/>
+            <div className={s.friends__items}>
+                <h2>Friends</h2>
+                <div className={s.friends_container}>
+                    <SidebarFriendsContainer/>
+                </div>
+            </div>
         </div>
     );
 };

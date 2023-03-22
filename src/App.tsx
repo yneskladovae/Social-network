@@ -9,7 +9,6 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
-import {ActionsTypes, StateType, StoreType} from "./redux/store";
 import { SidebarFriends } from './components/SidebarFriends/SidebarFriends';
 
 type AppPropsType = {
