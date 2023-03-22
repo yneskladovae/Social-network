@@ -40,10 +40,10 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionsT
             }
             state = {...state, messagesData: [...state.messagesData, newMessage]}
             state.newMessageText = "";
-            break;
+            return state;
         case 'UPDATE-NEW-MESSAGE-TEXT':
             state = {...state, newMessageText: action.payload.newText}
-            break;
+            return state;
     }
     return state;
 }
