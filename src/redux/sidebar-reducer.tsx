@@ -49,7 +49,7 @@ export type ActionsTypes = ReturnType<typeof sidebarActionCreator>
 
 export const sidebarActionCreator = () => {
     return {
-        type: "FRIENDS-SIDEBAR",
+        type: "FRIENDS-SIDEBAR"
     } as const
 }
 

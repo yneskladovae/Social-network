@@ -4,6 +4,7 @@ export type InitialStateType = {
     postData: PostType[]
     newPostText: string
 }
+
 export type PostType = {
     id: string
     message: string
