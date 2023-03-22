@@ -27,10 +27,24 @@ const dialogsReducer = (state: DialogsPageType = initialState, action: ActionsTy
             state.newMessageText = "";
             break;
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state = {...state, newMessageText: action.newText}
+            state = {...state, newMessageText: action.payload.newText}
             break;
     }
     return state;
+}
+
+export const addMessageActionCreator = () => {
+    return {
+        type: "ADD-MESSAGE",
+    } as const
+}
+export const updateNewMessageTextActionCreator = (newText: string) => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-TEXT",
+        payload: {
+            newText
+        }
+    } as const
 }
 
 export default dialogsReducer;

@@ -32,4 +32,11 @@ const sidebarReducer = (state: SidebarFriendsType = initialState, action: Action
     return state
 }
 
+export const sidebarActionCreator = () => {
+    return {
+        type: "FRIENDS-SIDEBAR",
+    } as const
+}
+
 export default sidebarReducer;
+

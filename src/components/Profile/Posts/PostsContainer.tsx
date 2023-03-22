@@ -1,6 +1,7 @@
 import React from "react";
-import {addPostActionCreator, StoreType, updateNewPostTextActionCreator,} from "../../../redux/store";
+import {StoreType} from "../../../redux/store";
 import {Posts} from "./Posts";
+import {addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/profile-reducer";
 
 export type PostsContainerPropsType = {
     store: StoreType

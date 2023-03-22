@@ -5,9 +5,9 @@ import u3 from "./img/u3.png"
 import u4 from "./img/u4.png"
 import u5 from "./img/u5.png"
 import u6 from "./img/u6.png"
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from "./profile-reducer";
+import dialogsReducer, {addMessageActionCreator, updateNewMessageTextActionCreator} from "./dialogs-reducer";
+import sidebarReducer, {sidebarActionCreator} from "./sidebar-reducer";
 
 export type MessageType = {
     id: string
@@ -53,26 +53,11 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type sidebarActionType = {
-    type: "FRIENDS-SIDEBAR"
-}
-export type AddPostActionType = {
-    type: "ADD-POST"
-}
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT"
-    newText: string
-}
-export type AddMessageActionType = {
-    type: "ADD-MESSAGE"
-
-}
-export type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT"
-    newText: string
-}
-
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | AddMessageActionType | UpdateNewMessageTextActionType | sidebarActionType
+export type ActionsTypes = ReturnType<typeof sidebarActionCreator>
+    | ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof updateNewMessageTextActionCreator>
+    | ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
 
 let store: StoreType = {
     _state: {
@@ -160,35 +145,6 @@ let store: StoreType = {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._state.sidebarFriends = sidebarReducer(this._state.sidebarFriends, action);
         this._callSubscriber(this._state);
-    }
-}
-
-export const sidebarActionCreator = ():sidebarActionType => {
-    return {
-        type: "FRIENDS-SIDEBAR",
-    }
-}
-
-export const addPostActionCreator = ():AddPostActionType => {
-    return {
-        type: "ADD-POST",
-    }
-}
-export const updateNewPostTextActionCreator = (newText: string):UpdateNewPostTextActionType => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
-        newText: newText,
-    }
-}
-export const addMessageActionCreator = ():AddMessageActionType => {
-    return {
-        type: "ADD-MESSAGE",
-    }
-}
-export const updateNewMessageTextActionCreator = (newText: string):UpdateNewMessageTextActionType => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
-        newText: newText,
     }
 }
 
