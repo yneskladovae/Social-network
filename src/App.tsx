@@ -10,9 +10,10 @@ import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import {Users} from "./components/Users/Users";
 import { SidebarFriends } from './components/SidebarFriends/SidebarFriends';
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 type AppPropsType = {
-    // state: StateType
+
 }
 
 const App: React.FC<AppPropsType> = () => {
@@ -24,9 +25,10 @@ const App: React.FC<AppPropsType> = () => {
                     <Navbar/>
                     <div className={"app-content"}>
                         <Route path={"/profile"} render={() => <Profile/>}/>
-                        <Route path={"/dialogs"} render={() => <Dialogs />}/>
+                        <Route path={"/dialogs"} render={() => <Dialogs/>}/>
                         <Route path={"/news"} component={News}/>
-                        <Route path={"/users"} component={Users}/>
+                        <Route path={"/users"} render={() => <UsersContainer/>}/>
+                        {/*<Route path={"/users"} component={Users}/>*/}
                         <Route path={"/music"} component={Music}/>
                         <Route path={"/settings"} component={Settings}/>
                     </div>
