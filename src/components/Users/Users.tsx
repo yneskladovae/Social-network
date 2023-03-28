@@ -73,7 +73,7 @@ export const Users: React.FC<UsersPropsType> = ({users, follow, unfollow, setUse
             // ])
         }
     }
-    
+
     return (
         <div>
             <button onClick={getUsers}>Get Users</button>
