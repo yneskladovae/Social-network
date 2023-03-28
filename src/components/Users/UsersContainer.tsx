@@ -10,8 +10,8 @@ export type MapStateToPropsType = {
 }
 
 export type MapDispatchToPropsType = {
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     setUsers: (users: UsersType[]) => void
 }
 
