@@ -1,5 +1,3 @@
-import {v1} from "uuid";
-
 export type InitialStateType = {
     users: UsersType[]
 }

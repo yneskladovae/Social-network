@@ -1,7 +1,6 @@
 import s from "./Users.module.css"
 import {UsersType} from "../../redux/users-reducer";
 import React from "react";
-import {v1} from "uuid";
 import axios from "axios";
 
 type UsersPropsType = {
@@ -11,86 +10,34 @@ type UsersPropsType = {
     setUsers: (users: UsersType[]) => void
 }
 
-export const Users: React.FC<UsersPropsType> = ({users, follow, unfollow, setUsers}) => {
-
-    const getUsers = () => {
-        if (users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(response => {
-                    setUsers(response.data.items)
-                })
-            // setUsers([
-            //     {
-            //         id: v1(),
-            //         fullName: 'Denis',
-            //         status: 'Lorem ipsum dolor sit amet',
-            //         location: {
-            //             city: 'Minsk',
-            //             country: 'Belarus',
-            //         },
-            //         isFollow: false,
-            //     },
-            //     {
-            //         id: v1(),
-            //         fullName: 'Stas',
-            //         status: 'Mymy',
-            //         location: {
-            //             city: 'Gomel',
-            //             country: 'Belarus',
-            //         },
-            //         isFollow: true,
-            //     },
-            //     {
-            //         id: v1(),
-            //         fullName: 'Tima',
-            //         status: 'viscas el barka',
-            //         location: {
-            //             city: 'barcelona',
-            //             country: 'Belarus',
-            //         },
-            //         isFollow: false,
-            //     },
-            //     {
-            //         id: v1(),
-            //         fullName: 'Anna',
-            //         status: 'mew mew',
-            //         location: {
-            //             city: 'Gomel',
-            //             country: 'Belarus',
-            //         },
-            //         isFollow: false,
-            //     },
-            //     {
-            //         id: v1(),
-            //         fullName: 'Crish',
-            //         status: 'Siiiiiiiiiiiii',
-            //         location: {
-            //             city: 'Minsk',
-            //             country: 'Belarus',
-            //         },
-            //         isFollow: true,
-            //     },
-            // ])
-        }
+class Users extends React.Component<UsersPropsType> {
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            })
     }
 
-    return (
-        <div>
-            <button onClick={getUsers}>Get Users</button>
-            {users?.map(el => {
-                return (
-                    <div key={el.id}>
-                        <div>Name: {el.name}</div>
-                        <div>Status: {el.status}</div>
-                        <div>
-                            {!el.followed
-                                ? <button onClick={() => follow(el.id)}>Follow</button>
-                                : <button onClick={() => unfollow(el.id)}>Unfollow</button>
-                            }
+    render() {
+        return (
+            <div>
+                {this.props.users?.map(el => {
+                    return (
+                        <div key={el.id}>
+                            <div>Name: {el.name}</div>
+                            <div>Status: {el.status}</div>
+                            <div>
+                                {!el.followed
+                                    ? <button onClick={() => this.props.follow(el.id)}>Follow</button>
+                                    : <button onClick={() => this.props.unfollow(el.id)}>Unfollow</button>
+                                }
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
-        </div>
-    )
+                    )
+                })}
+            </div>
+        )
+    }
 }
+
+export default Users;
