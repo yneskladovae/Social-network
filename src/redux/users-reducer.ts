@@ -94,35 +94,8 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionsTyp
     }
 }
 
-// export const followAC = (userId: string) => {
-//     return {
-//         type: "FOLLOW",
-//         payload: {
-//             userId
-//         } as const
-//     }
-// }
-//
-// export const unfollowAC = (userId: string) => {
-//     return {
-//         type: "UNFOLLOW",
-//         payload: {
-//             userId
-//         } as const
-//     }
-// }
-
-// export const setUsersAC = (users: InitialStateType) => {
-//     return {
-//         type: "SET-USERS",
-//         payload: {
-//             users
-//         } as const
-//     }
-// }
 export const followAC = (userId: number) => ({type: "FOLLOW", userId}) as const
 export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId}) as const
 export const setUsersAC = (users: UsersType[]) => ({type: "SET_USERS", users}) as const
-
 
 export default usersReducer;

@@ -6,7 +6,7 @@ import {AppStateType} from "../../redux/redux-store";
 import Users from "./Users";
 
 export type MapStateToPropsType = {
-    users: UsersType[]
+    usersPage: UsersType[]
 }
 
 export type MapDispatchToPropsType = {
@@ -17,10 +17,9 @@ export type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users
+        usersPage: state.usersPage.users
     }
 }
-
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId) => dispatch(followAC(userId)),
