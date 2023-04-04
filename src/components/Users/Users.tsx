@@ -16,6 +16,7 @@ class Users extends React.Component<UsersPropsType> {
             .then(response => {
                 console.log(response.data.items)
                 this.props.setUsers(response.data.items)
+                console.log(response.data.items)
             })
     }
 
