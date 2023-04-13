@@ -13,6 +13,30 @@ export type PostType = {
     date: string
 }
 
+export type UserProfileType = null | {
+    aboutMe: string,
+    contacts: {
+        facebook: string,
+        website: string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string,
+        github: string,
+        mainLink: string,
+    },
+    lookingForAJob: boolean,
+    lookingForADescription: string,
+    fullName: string,
+    userId: number,
+    photos: UserPhotosType,
+}
+
+export type UserPhotosType = {
+    large: string | undefined,
+    small: string | undefined,
+}
+
 const initialState: InitialStateType = {
     postData: [
         {

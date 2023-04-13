@@ -2,6 +2,7 @@ import s from "./Users.module.css"
 import {UsersType} from "../../redux/users-reducer";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import avatarUndefined from "../../assets/img/avatarUndefind.png"
 
 type UsersPropsType = {
     usersPage: UsersType[]
@@ -57,7 +58,7 @@ export const Users: React.FC<UsersPropsType> = ({
                         <div>
                             <NavLink to={'/profile/' + el.id}>
                                 <img style={{width: '80px'}}
-                                     src={el.photos.small !== null ? el.photos.small : 'https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png'}
+                                     src={el.photos.small !== null ? el.photos.small : avatarUndefined}
                                      alt="user_avatar"
                                 />
                             </NavLink>

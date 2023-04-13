@@ -24,7 +24,7 @@ const App: React.FC<AppPropsType> = () => {
                 <div className={"flex-container"}>
                     <Navbar/>
                     <div className={"app-content"}>
-                        <Route path={"/profile"} render={() => <ProfileContainer/>}/>
+                        <Route path={"/profile/:userId*"} render={() => <ProfileContainer/>}/>
                         {/*<Route path={"/profile"} render={() => <Profile/>}/>*/}
                         <Route path={"/dialogs"} render={() => <Dialogs/>}/>
                         <Route path={"/news"} component={News}/>

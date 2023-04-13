@@ -13,4 +13,6 @@
     margin: -165px auto 0;
     box-sizing: border-box;
     cursor: pointer;
+    width: 170px;
+    padding: 5px;
 }

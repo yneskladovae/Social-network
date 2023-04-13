@@ -5,16 +5,17 @@ import {ProfileName} from "./ProfileName/ProfileName";
 import {ProfileStatus} from "./ProfileStatus/ProfileStatus";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsContainer} from "./Posts/PostsContainer";
+import {UserProfileType} from "../../redux/profile-reducer";
 
 type ProfilePropsType = {
-    profile: any
+    profile: UserProfileType
 }
 
 export const Profile: React.FC<ProfilePropsType> = ({profile}) => {
     return (
         <div className={s.content}>
-            <ProfileAvatar profile={profile}/>
-            <ProfileName/>
+            <ProfileAvatar photos={profile?.photos}/>
+            <ProfileName fullName={profile?.fullName}/>
             <ProfileStatus/>
             <ProfileInfo/>
             <PostsContainer/>
