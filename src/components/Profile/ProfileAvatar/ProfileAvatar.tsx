@@ -2,8 +2,16 @@ import React from "react";
 import s from "./ProfileAvatar.module.css"
 import bg from "./img/bg.png"
 import avatar from "./img/avatar.png"
+import {Preloader} from "../../common/Preloader/Preloader";
 
-export const ProfileAvatar = () => {
+type ProfileAvatar = {
+    profile: any
+}
+
+export const ProfileAvatar: React.FC<ProfileAvatar> = ({profile}) => {
+    if (!profile) {
+        return <Preloader/>
+    }
     return (
         <div className={s.content}>
             <div>
@@ -12,7 +20,9 @@ export const ProfileAvatar = () => {
                      alt="img"/>
             </div>
             <div className={s.content__avatar}>
-                <img src={avatar} alt="img"/>
+                {profile.photos.large ? <img src={profile.photos.large} alt="img"/> : <img src={avatar} alt="img"/>}
+                {/*<img src={avatar} alt="img"/>*/}
+                {/*<img src={profile.photos.large} alt="img"/>*/}
                 {/*<h3 className={s.content__avatar__name}>Till Liberman</h3>*/}
             </div>
         </div>

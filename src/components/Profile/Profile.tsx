@@ -7,13 +7,13 @@ import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
 import {PostsContainer} from "./Posts/PostsContainer";
 
 type ProfilePropsType = {
-    // store: StoreType
+    profile: any
 }
 
-export const Profile: React.FC<ProfilePropsType> = () => {
+export const Profile: React.FC<ProfilePropsType> = ({profile}) => {
     return (
         <div className={s.content}>
-            <ProfileAvatar/>
+            <ProfileAvatar profile={profile}/>
             <ProfileName/>
             <ProfileStatus/>
             <ProfileInfo/>

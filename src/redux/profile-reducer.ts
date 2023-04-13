@@ -3,6 +3,7 @@ import {v1} from "uuid";
 export type InitialStateType = {
     postData: PostType[]
     newPostText: string
+    profile: any
 }
 
 export type PostType = {
@@ -45,12 +46,13 @@ const initialState: InitialStateType = {
             date: "14:15 25.01.2023"
         },
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case 'ADD-POST': {
             const newPost = {
                 id: v1(),
                 message: state.newPostText,
@@ -60,15 +62,23 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
             state = {...state, postData: [newPost, ...state.postData]}
             state.newPostText = '';
             return state;
-        case 'UPDATE-NEW-POST-TEXT':
+        }
+        case 'UPDATE-NEW-POST-TEXT': {
             state = {...state, newPostText: action.payload.newText};
             return state;
+        }
+        case 'SET-USER-PROFILE': {
+            state = {...state, profile: action.payload.profile};
+            return state;
+        }
+
     }
     return state;
 }
 
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof setUserProfile>
 
 export const addPostActionCreator = () => {
     return {
@@ -81,8 +91,17 @@ export const updateNewPostTextActionCreator = (newText: string) => {
         type: "UPDATE-NEW-POST-TEXT",
         payload: {
             newText
-        } as const
-    }
+        }
+    } as const
+}
+
+export const setUserProfile = (profile: any) => {
+    return {
+        type: "SET-USER-PROFILE",
+        payload: {
+            profile
+        }
+    } as const
 }
 
 export default profileReducer;
