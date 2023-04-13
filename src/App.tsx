@@ -9,7 +9,8 @@ import {Music} from "./components/Music/Music";
 import {News} from "./components/News/News";
 import {Settings} from "./components/Settings/Settings";
 import { SidebarFriends } from './components/SidebarFriends/SidebarFriends';
-import {UsersContainer} from "./components/Users/UsersContainer";
+import UsersContainer from "./components/Users/UsersContainer";
+
 
 type AppPropsType = {
 
