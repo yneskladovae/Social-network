@@ -22,6 +22,12 @@ export const Users: React.FC<UsersPropsType> = ({
                                                     onPageChanged
                                                 }) => {
 
+    // const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+    // const pages = []
+    // for (let i = 1; i <= pagesCount; i++) {
+    //     pages.push(i)
+    // }
+
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = [];
     for (let i = 1; i <= pagesCount; i += 1) {
