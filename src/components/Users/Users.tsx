@@ -3,6 +3,7 @@ import {UsersType} from "../../redux/users-reducer";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import avatarUndefined from "../../assets/img/avatarUndefind.png"
+import axios from "axios";
 
 type UsersPropsType = {
     usersPage: UsersType[]
@@ -67,8 +68,32 @@ export const Users: React.FC<UsersPropsType> = ({
                         <div>Status: {el.status}</div>
                         <div>
                             {!el.followed
-                                ? <button onClick={() => follow(el.id)}>Follow</button>
-                                : <button onClick={() => unfollow(el.id)}>Unfollow</button>
+                                ? <button onClick={() => {
+                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': '3e0c4b7e-0bea-4155-a31d-3500dd1e1abc'
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                follow(el.id)
+                                            }
+                                        })
+                                }}>Follow</button>
+                                : <button onClick={() => {
+                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': '3e0c4b7e-0bea-4155-a31d-3500dd1e1abc'
+                                        }
+                                    })
+                                        .then(response => {
+                                            if (response.data.resultCode === 0) {
+                                                unfollow(el.id)
+                                            }
+                                        })
+                                }}>Unfollow</button>
                             }
                         </div>
                     </div>
