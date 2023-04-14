@@ -1,15 +1,17 @@
 import React from "react";
 import s from "./ProfileName.module.css"
+import {UserProfileType} from "../../../redux/profile-reducer";
 
 type ProfileNamePropsType = {
-    fullName: string | undefined
+    profile: UserProfileType
 }
 
-export const ProfileName: React.FC<ProfileNamePropsType> = ({fullName}) => {
+export const ProfileName: React.FC<ProfileNamePropsType> = ({profile}) => {
+    debugger
     return (
         <div className={s.content}>
             <div className={s.content__avatar}>
-                <h3 className={s.content__avatar__name}>{fullName ? fullName : 'Denis Polunosik'}</h3>
+                <h3 className={s.content__avatar__name}>{profile?.fullName && profile.fullName}</h3>
             </div>
         </div>
     );

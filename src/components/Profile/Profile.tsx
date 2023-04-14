@@ -14,8 +14,8 @@ type ProfilePropsType = {
 export const Profile: React.FC<ProfilePropsType> = ({profile}) => {
     return (
         <div className={s.content}>
-            <ProfileAvatar photos={profile?.photos}/>
-            <ProfileName fullName={profile?.fullName}/>
+            <ProfileAvatar profile={profile}/>
+            <ProfileName profile={profile}/>
             <ProfileStatus/>
             <ProfileInfo/>
             <PostsContainer/>

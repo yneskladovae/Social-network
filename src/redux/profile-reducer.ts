@@ -3,7 +3,7 @@ import {v1} from "uuid";
 export type InitialStateType = {
     postData: PostType[]
     newPostText: string
-    profile: any
+    profile: UserProfileType
 }
 
 export type PostType = {

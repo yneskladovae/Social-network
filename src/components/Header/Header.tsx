@@ -1,9 +1,15 @@
 import React from "react";
 import s from './Header.module.css'
 import logo from "./img/logo.png"
-import login from "./img/login.png"
+import loginIcon from "./img/login.png"
+import {NavLink} from "react-router-dom";
 
-export const Header = () => {
+type HeaderPropsType = {
+    isAuth: boolean
+    login: string | null
+}
+
+export const Header: React.FC<HeaderPropsType> = ({isAuth, login}) => {
     return (
         <header className={s.header}>
             <div>
@@ -12,8 +18,13 @@ export const Header = () => {
                     Social <br/>Network
                 </h1>
             </div>
-            <div>
-                <img src={login} alt="login"/>
+            <div className={s.header__login}>
+                {isAuth ? login :
+                    <NavLink to={'/login'}>
+                    <img src={loginIcon} alt="login"/>
+                </NavLink>
+                }
+
             </div>
         </header>
     );

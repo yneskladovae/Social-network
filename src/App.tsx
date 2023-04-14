@@ -11,6 +11,7 @@ import {Settings} from "./components/Settings/Settings";
 import { SidebarFriends } from './components/SidebarFriends/SidebarFriends';
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 type AppPropsType = {
 
@@ -20,7 +21,7 @@ const App: React.FC<AppPropsType> = () => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <div className={"flex-container"}>
                     <Navbar/>
                     <div className={"app-content"}>
