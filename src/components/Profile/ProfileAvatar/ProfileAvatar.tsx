@@ -15,7 +15,7 @@ export const ProfileAvatar: React.FC<ProfileAvatar> = ({profile}) => {
     if (!profile) {
         return <Preloader/>
     }
-    debugger
+
     return (
         <div className={s.content}>
             <div>

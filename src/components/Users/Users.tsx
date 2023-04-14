@@ -1,5 +1,5 @@
 import s from "./Users.module.css"
-import {UsersType} from "../../redux/users-reducer";
+import {toggleFollowingProgress, UsersType} from "../../redux/users-reducer";
 import React from "react";
 import {NavLink} from "react-router-dom";
 import avatarUndefined from "../../assets/img/avatarUndefind.png"
@@ -14,6 +14,8 @@ type UsersPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
+    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
 }
 
 export const Users: React.FC<UsersPropsType> = ({
@@ -23,7 +25,9 @@ export const Users: React.FC<UsersPropsType> = ({
                                                     currentPage,
                                                     follow,
                                                     unfollow,
-                                                    onPageChanged
+                                                    onPageChanged,
+                                                    toggleFollowingProgress,
+                                                    followingInProgress
                                                 }) => {
 
     // const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
@@ -48,9 +52,9 @@ export const Users: React.FC<UsersPropsType> = ({
 
     return (
         <div>
-            {slicedPages.map(el => {
+            {slicedPages.map((el, index) => {
                 return (
-                    <span onClick={() => onPageChanged((el))}
+                    <span key={index} onClick={() => onPageChanged((el))}
                           className={currentPage === el ? s.selectedPage : ""}>{el}</span>
                 )
             })}
@@ -69,32 +73,36 @@ export const Users: React.FC<UsersPropsType> = ({
                         <div>Status: {el.status}</div>
                         <div>
                             {!el.followed
-                                ? <button onClick={() => {
+                                ? <button disabled={followingInProgress.some(id => id === el.id)} onClick={() => {
                                     // axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {}, {
                                     //     withCredentials: true,
                                     //     headers: {
                                     //         'API-KEY': '3e0c4b7e-0bea-4155-a31d-3500dd1e1abc'
                                     //     }
                                     // })
+                                    toggleFollowingProgress(true, el.id)
                                     usersAPI.setFollow(el.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 follow(el.id)
                                             }
+                                            toggleFollowingProgress(false,  el.id)
                                         })
                                 }}>Follow</button>
-                                : <button onClick={() => {
+                                : <button disabled={followingInProgress.some(id => id === el.id)} onClick={() => {
                                     // axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${el.id}`, {
                                     //     withCredentials: true,
                                     //     headers: {
                                     //         'API-KEY': '3e0c4b7e-0bea-4155-a31d-3500dd1e1abc'
                                     //     }
                                     // })
+                                    toggleFollowingProgress(true,  el.id)
                                     usersAPI.setUnfollow(el.id)
                                         .then(data => {
                                             if (data.resultCode === 0) {
                                                 unfollow(el.id)
                                             }
+                                            toggleFollowingProgress(false,  el.id)
                                         })
                                 }}>Unfollow</button>
                             }

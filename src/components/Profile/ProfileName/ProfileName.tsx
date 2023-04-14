@@ -7,7 +7,6 @@ type ProfileNamePropsType = {
 }
 
 export const ProfileName: React.FC<ProfileNamePropsType> = ({profile}) => {
-    debugger
     return (
         <div className={s.content}>
             <div className={s.content__avatar}>
