@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Data access  layer
+// Data access layer
 const instance = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
