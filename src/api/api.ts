@@ -3,7 +3,7 @@ import axios from "axios";
 // Data access layer
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    baseURL: 'https://social-network.samuraijs.com/api/1.0',
     headers: {
         'API-KEY': '3e0c4b7e-0bea-4155-a31d-3500dd1e1abc'
     },
@@ -11,7 +11,7 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+        return instance.get(`/users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
     isAuth() {
@@ -24,6 +24,10 @@ export const usersAPI = {
     },
     setUnfollow(userId: number) {
         return instance.delete(`/follow/${userId}`)
+            .then(response => response.data)
+    },
+    getUserProfile(currUserId: string | 28468) {
+        return instance.get(`/profile/${currUserId}`)
             .then(response => response.data)
     },
 }

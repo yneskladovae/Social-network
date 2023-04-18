@@ -51,16 +51,15 @@
 
 
 import React, {useEffect} from "react";
-import axios from "axios";
 import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import {Profile} from "./Profile";
 import {AppStateType} from "../../redux/redux-store";
-import {setUserProfile, UserProfileType} from "../../redux/profile-reducer";
+import {getUserProfileThunkCreator, setUserProfile, UserProfileType} from "../../redux/profile-reducer";
 
 type ProfileContainerPropsType = {
-    setUserProfile: (profile: UserProfileType) => void
     profile: UserProfileType
+    getUserProfileThunkCreator: (currUserId: string | 28468) => void
 }
 
 interface RouteParams {
@@ -72,11 +71,7 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
     const currUserId = userId || 28468
 
     useEffect(() => {
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/profile/${currUserId}`)
-            .then((response) => {
-                props.setUserProfile(response.data);
-            });
+        props.getUserProfileThunkCreator(currUserId)
     }, [userId]);
 
     return (
@@ -94,4 +89,4 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
 });
 
-export default connect(mapStateToProps, {setUserProfile})(ProfileContainer);
+export default connect(mapStateToProps, {setUserProfile, getUserProfileThunkCreator})(ProfileContainer);

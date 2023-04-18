@@ -1,4 +1,7 @@
 import {v1} from "uuid";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {setAuthUserData} from "./auth-reducer";
 
 export type InitialStateType = {
     postData: PostType[]
@@ -119,13 +122,22 @@ export const updateNewPostTextActionCreator = (newText: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: UserProfileType) => {
     return {
         type: "SET-USER-PROFILE",
         payload: {
             profile
         }
     } as const
+}
+
+export const getUserProfileThunkCreator = (currUserId: string | 28468) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getUserProfile(currUserId)
+            .then((data) => {
+                dispatch(setUserProfile(data));
+            });
+    }
 }
 
 export default profileReducer;

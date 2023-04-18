@@ -1,3 +1,7 @@
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
+import {setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching} from "./users-reducer";
+
 export type InitialStateType = {
     id: number | null
     email: string | null
@@ -33,5 +37,15 @@ export const setAuthUserData = (data: InitialStateType) => {
     } as const
 }
 
+export const authUserData = () => {
+    return (dispatch: Dispatch) => {
+        usersAPI.isAuth()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(setAuthUserData(data.data))
+                }
+            })
+    }
+}
 
 export default AuthReducer;
