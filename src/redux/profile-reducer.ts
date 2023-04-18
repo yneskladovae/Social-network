@@ -131,7 +131,7 @@ export const setUserProfile = (profile: UserProfileType) => {
     } as const
 }
 
-export const getUserProfileThunkCreator = (currUserId: string | 28468) => {
+export const getUserProfile = (currUserId: string | 28468) => {
     return (dispatch: Dispatch) => {
         usersAPI.getUserProfile(currUserId)
             .then((data) => {

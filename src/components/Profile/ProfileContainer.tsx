@@ -55,11 +55,11 @@ import {connect} from "react-redux";
 import {useParams} from "react-router-dom";
 import {Profile} from "./Profile";
 import {AppStateType} from "../../redux/redux-store";
-import {getUserProfileThunkCreator, setUserProfile, UserProfileType} from "../../redux/profile-reducer";
+import {getUserProfile, setUserProfile, UserProfileType} from "../../redux/profile-reducer";
 
 type ProfileContainerPropsType = {
     profile: UserProfileType
-    getUserProfileThunkCreator: (currUserId: string | 28468) => void
+    getUserProfile: (currUserId: string | 28468) => void
 }
 
 interface RouteParams {
@@ -71,7 +71,7 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
     const currUserId = userId || 28468
 
     useEffect(() => {
-        props.getUserProfileThunkCreator(currUserId)
+        props.getUserProfile(currUserId)
     }, [userId]);
 
     return (
@@ -89,4 +89,4 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
 });
 
-export default connect(mapStateToProps, {setUserProfile, getUserProfileThunkCreator})(ProfileContainer);
+export default connect(mapStateToProps, {setUserProfile, getUserProfile})(ProfileContainer);
