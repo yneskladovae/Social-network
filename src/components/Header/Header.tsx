@@ -21,8 +21,8 @@ export const Header: React.FC<HeaderPropsType> = ({isAuth, login}) => {
             <div className={s.header__login}>
                 {isAuth ? login :
                     <NavLink to={'/login'}>
-                    <img src={loginIcon} alt="login"/>
-                </NavLink>
+                        <img src={loginIcon} alt="login"/>
+                    </NavLink>
                 }
 
             </div>

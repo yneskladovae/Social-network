@@ -1,22 +1,17 @@
 import s from "./Dialogs.module.css"
 import React from "react";
 import {MessageContainer} from "./Message/MessageContainer";
+import {Redirect} from "react-router-dom";
 
 export type DialogsPropsType = {
-    // store: StoreType
+    isAuth: boolean
 }
 
-export const Dialogs: React.FC<DialogsPropsType> = () => {
-    // const state = store.getState().dialogsPage
-    // const dialogsElements = state.dialogsData
-    //     .map((dialog) => <Dialog name={dialog.name} id={dialog.id}/>)
-
+export const Dialogs: React.FC<DialogsPropsType> = ({isAuth}) => {
+    if (!isAuth) return <Redirect to={"/login"}/>
     return (
-        // {/*<div className={s.dialogs__items}>*/}
-        // {/*    {dialogsElements}*/}
-        // {/*</div>*/}
         <div className={s.dialogs}>
-                <MessageContainer/>
+            <MessageContainer/>
         </div>
     )
 }

@@ -52,7 +52,7 @@
 
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
-import {useParams} from "react-router-dom";
+import {Redirect, useParams} from "react-router-dom";
 import {Profile} from "./Profile";
 import {AppStateType} from "../../redux/redux-store";
 import {getUserProfile, setUserProfile, UserProfileType} from "../../redux/profile-reducer";
@@ -60,6 +60,7 @@ import {getUserProfile, setUserProfile, UserProfileType} from "../../redux/profi
 type ProfileContainerPropsType = {
     profile: UserProfileType
     getUserProfile: (currUserId: string | 28468) => void
+    isAuth: boolean
 }
 
 interface RouteParams {
@@ -74,6 +75,8 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
         props.getUserProfile(currUserId)
     }, [userId]);
 
+    if (!props.isAuth) return <Redirect to={"/login"}/>
+
     return (
         <div>
             <Profile {...props} profile={props.profile}/>
@@ -83,10 +86,12 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
 
 export type MapStateToPropsType = {
     profile: UserProfileType
+    isAuth: boolean
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
+    isAuth: state.auth.isAuth
 });
 
 export default connect(mapStateToProps, {setUserProfile, getUserProfile})(ProfileContainer);

@@ -12,6 +12,8 @@ import { SidebarFriends } from './components/SidebarFriends/SidebarFriends';
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {Login} from "./components/Login/Login";
+import {DialogContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
 
@@ -27,12 +29,13 @@ const App: React.FC<AppPropsType> = () => {
                     <div className={"app-content"}>
                         <Route path={"/profile/:userId*"} render={() => <ProfileContainer/>}/>
                         {/*<Route path={"/profile"} render={() => <Profile/>}/>*/}
-                        <Route path={"/dialogs"} render={() => <Dialogs/>}/>
+                        <Route path={"/dialogs"} render={() => <DialogContainer/>}/>
                         <Route path={"/news"} component={News}/>
                         <Route path={"/users"} render={() => <UsersContainer/>}/>
                         {/*<Route path={"/users"} component={Users}/>*/}
                         <Route path={"/music"} component={Music}/>
                         <Route path={"/settings"} component={Settings}/>
+                        <Route path={"/login"} render={() => <Login/>}/>
                     </div>
                     <SidebarFriends/>
                 </div>

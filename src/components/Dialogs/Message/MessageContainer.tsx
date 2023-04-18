@@ -1,12 +1,18 @@
 import React from "react";
 import {Message} from "./Message";
-import {addMessageActionCreator, InitialStateType, updateNewMessageTextActionCreator} from "../../../redux/dialogs-reducer";
+import {
+    addMessageActionCreator,
+    InitialStateType,
+    updateNewMessageTextActionCreator
+} from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
-import { Dispatch } from "redux";
+import {Dispatch} from "redux";
+import {AppStateType} from "../../../redux/redux-store";
 
 
 export type MapStateToPropsType = {
     dialogsPage: InitialStateType
+    isAuth: boolean
 }
 
 export type MapDispatchToPropsType = {
@@ -50,9 +56,10 @@ export type MapDispatchToPropsType = {
 //     </StoreContext.Consumer>
 // }
 
-const mapStateToProps = (state:MapStateToPropsType) => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 
