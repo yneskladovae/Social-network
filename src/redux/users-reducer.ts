@@ -120,7 +120,7 @@ export const followThunkCreator = (userId: number) => {
                 if (data.resultCode === 0) {
                     dispatch(follow(userId))
                 }
-                dispatch(toggleFollowingProgress(false,  userId))
+                dispatch(toggleFollowingProgress(false, userId))
             })
     }
 }
@@ -133,11 +133,9 @@ export const unfollowThunkCreator = (userId: number) => {
                 if (data.resultCode === 0) {
                     dispatch(unfollow(userId))
                 }
-                dispatch(toggleFollowingProgress(false,  userId))
+                dispatch(toggleFollowingProgress(false, userId))
             })
     }
 }
-
-
 
 export default usersReducer;
