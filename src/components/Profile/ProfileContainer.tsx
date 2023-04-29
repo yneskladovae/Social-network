@@ -67,6 +67,15 @@ interface RouteParams {
     userId: string;
 }
 
+// export const withAuthRedirect = (Component: any) => {
+//     let redirectComponent = (props: any) =>  {
+//         if (!props.isAuth) return <Redirect to={'/login'} />
+//         return <Component {...props} />
+//     }
+//     return redirectComponent
+// }
+
+
 export const ProfileContainer = (props: ProfileContainerPropsType) => {
     const {userId} = useParams<RouteParams>();
     const currUserId = userId || 28468
@@ -75,7 +84,7 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
         props.getUserProfile(currUserId)
     }, [userId]);
 
-    if (!props.isAuth) return <Redirect to={"/login"}/>
+    // if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div>
