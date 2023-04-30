@@ -26,9 +26,6 @@ export const ProfileAvatar: React.FC<ProfileAvatar> = ({profile}) => {
             </div>
             <div className={s.content__avatar}>
                 {profile.photos.large ? <img src={profile.photos.large} alt="img"/> : <img src={avatar} alt="img"/>}
-                {/*<img src={myAvatar} alt="img"/>*/}
-                {/*<img src={profile.photos.large} alt="img"/>*/}
-                {/*<h3 className={s.content__avatar__name}>Till Liberman</h3>*/}
             </div>
         </div>
     );
