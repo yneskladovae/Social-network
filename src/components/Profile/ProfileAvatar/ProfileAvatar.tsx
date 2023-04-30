@@ -11,7 +11,8 @@ type ProfileAvatar = {
 }
 
 export const ProfileAvatar: React.FC<ProfileAvatar> = ({profile}) => {
-
+    console.log(profile)
+    console.log(profile?.photos.large)
     if (!profile) {
         return <Preloader/>
     }

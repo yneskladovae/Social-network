@@ -88,18 +88,18 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
 
 export type MapStateToPropsType = {
     profile: UserProfileType
-    // isAuth: boolean
+    isAuth: boolean
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    // isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth
 });
 
 export default compose<ComponentType>(
     connect(mapStateToProps, {setUserProfile, getUserProfile}),
     withAuthRedirect
-)(Profile)
+)(ProfileContainer)
 
 // const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 //

@@ -17,7 +17,7 @@ export const Profile: React.FC<ProfilePropsType> = ({profile}) => {
         <div className={s.content}>
             <ProfileAvatar profile={profile}/>
             <ProfileName profile={profile}/>
-            <ProfileStatus/>
+            <ProfileStatus profile={profile}/>
             <ProfileInfo/>
             <PostsContainer/>
         </div>
