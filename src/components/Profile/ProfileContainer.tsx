@@ -55,13 +55,20 @@ import {connect} from "react-redux";
 import {Redirect, useParams} from "react-router-dom";
 import {Profile} from "./Profile";
 import {AppStateType} from "../../redux/redux-store";
-import {getUserProfile, setUserProfile, UserProfileType} from "../../redux/profile-reducer";
+import {
+    getStatusTC,
+    getUserProfile,
+    setUserProfile, updateStatusTC,
+    UserProfileType
+} from "../../redux/profile-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 type ProfileContainerPropsType = {
     profile: UserProfileType
+    status: string
     getUserProfile: (currUserId: string | 28468) => void
+    getStatusTC: (userId: string | 28468) => void
     // isAuth: boolean
 }
 
@@ -77,11 +84,15 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
         props.getUserProfile(currUserId)
     }, [userId]);
 
+    useEffect(() => {
+        props.getStatusTC(currUserId)
+    }, [userId]);
+
     // if (!props.isAuth) return <Redirect to={"/login"}/>
 
     return (
         <div>
-            <Profile {...props} profile={props.profile}/>
+            <Profile {...props} profile={props.profile} status={props.status}/>
         </div>
     );
 }
@@ -89,15 +100,18 @@ export const ProfileContainer = (props: ProfileContainerPropsType) => {
 export type MapStateToPropsType = {
     profile: UserProfileType
     isAuth: boolean
+    status: string
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    status: state.profilePage.status
+
 });
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, {setUserProfile, getUserProfile}),
+    connect(mapStateToProps, {setUserProfile, getUserProfile, getStatusTC, updateStatusTC}),
     withAuthRedirect
 )(ProfileContainer)
 

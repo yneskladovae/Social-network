@@ -23,8 +23,21 @@ export const usersAPI = {
             .then(response => response.data)
     },
     getUserProfile(currUserId: string | 28468) {
+        console.log('Obsolate method. Please use profileAPI obj')
+        return profileAPI.getUserProfile(currUserId)
+    },
+}
+
+export const profileAPI = {
+    getUserProfile(currUserId: string | 28468) {
         return instance.get(`/profile/${currUserId}`)
             .then(response => response.data)
+    },
+    getStatus(userId: string) {
+        return instance.get(`/profile//status/${userId}`)
+    },
+    updateStatus(status: string) {
+        return instance.put(`/profile//status`, {status: status})
     },
 }
 

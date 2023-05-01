@@ -1,12 +1,13 @@
 import {v1} from "uuid";
 import {Dispatch} from "redux";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 import {setAuthUserData} from "./auth-reducer";
 
 export type InitialStateType = {
     postData: PostType[]
     newPostText: string
     profile: UserProfileType
+    status: string
 }
 
 export type PostType = {
@@ -74,9 +75,10 @@ const initialState: InitialStateType = {
         },
     ],
     newPostText: '',
-    profile: null
+    profile: null,
+    status: ''
 }
-
+console.log(initialState)
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST': {
@@ -98,6 +100,9 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
             state = {...state, profile: action.payload.profile};
             return state;
         }
+        case 'SET-STATUS': {
+            return {...state, status: action.payload.status};
+        }
 
     }
     return state;
@@ -106,6 +111,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setStatusAC>
 
 export const addPostActionCreator = () => {
     return {
@@ -138,6 +144,31 @@ export const getUserProfile = (currUserId: string | 28468) => {
                 dispatch(setUserProfile(data));
             });
     }
+}
+
+export const getStatusTC = (userId: string) => (dispatch: Dispatch) => {
+    profileAPI.getStatus(userId)
+        .then((response) => {
+            dispatch(setStatusAC(response.data));
+        });
+}
+
+export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
+    profileAPI.updateStatus(status)
+        .then((response) => {
+            if (response.data.resultCode === 1) {
+                dispatch(setStatusAC(response.data.statusText));
+            }
+        });
+}
+
+export const setStatusAC = (status: string) => {
+    return {
+        type: "SET-STATUS",
+        payload: {
+            status
+        }
+    } as const
 }
 
 export default profileReducer;

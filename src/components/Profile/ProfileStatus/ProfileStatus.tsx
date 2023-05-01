@@ -1,16 +1,20 @@
 import React, {ChangeEvent, FC, useState, KeyboardEvent} from "react";
 import s from "./ProfileStatus.module.css"
 import editPencil from "./img/editPencil.png"
-import {UserProfileType} from "../../../redux/profile-reducer";
+import {updateStatusTC, UserProfileType} from "../../../redux/profile-reducer";
 
-type ProfileStatusPropsType = {}
+type ProfileStatusPropsType = {
+    status: string
+}
 
-export const ProfileStatus: FC<ProfileStatusPropsType> = () => {
-    const [status, setStatus] = useState("Holla, Amigo!!!");
+export const ProfileStatus: FC<ProfileStatusPropsType> = ({status}) => {
+
+    const [userStatus, setUserStatus] = useState(status);
     const [editMode, setEditMode] = useState(false);
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setStatus(e.currentTarget.value);
+        setUserStatus(e.currentTarget.value);
+        updateStatusTC(userStatus)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -31,7 +35,7 @@ export const ProfileStatus: FC<ProfileStatusPropsType> = () => {
                         <h3>Status:</h3>
                         <input
                             type="text"
-                            value={status}
+                            value={userStatus}
                             onChange={onChangeHandler}
                             onKeyPress={onKeyPressHandler}
                             onBlur={editModeHandler}
@@ -41,7 +45,7 @@ export const ProfileStatus: FC<ProfileStatusPropsType> = () => {
                     </>
                     :
                     <>
-                        <h3>Status: <span onDoubleClick={editModeHandler}>{status}</span></h3>
+                        <h3>Status: <span onDoubleClick={editModeHandler}>{userStatus}</span></h3>
                         <img onClick={editModeHandler} src={editPencil} alt="edit"/>
                     </>
                 }
