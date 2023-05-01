@@ -78,10 +78,10 @@ const initialState: InitialStateType = {
     profile: null,
     status: ''
 }
-console.log(initialState)
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST': {
+            console.log(state)
             const newPost = {
                 id: v1(),
                 message: state.newPostText,
@@ -137,6 +137,15 @@ export const setUserProfile = (profile: UserProfileType) => {
     } as const
 }
 
+export const setStatusAC = (status: string) => {
+    return {
+        type: "SET-STATUS",
+        payload: {
+            status
+        }
+    } as const
+}
+
 export const getUserProfile = (currUserId: string | 28468) => {
     return (dispatch: Dispatch) => {
         usersAPI.getUserProfile(currUserId)
@@ -162,13 +171,5 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
         });
 }
 
-export const setStatusAC = (status: string) => {
-    return {
-        type: "SET-STATUS",
-        payload: {
-            status
-        }
-    } as const
-}
 
 export default profileReducer;

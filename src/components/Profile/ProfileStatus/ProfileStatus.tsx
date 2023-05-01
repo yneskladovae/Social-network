@@ -2,19 +2,19 @@ import React, {ChangeEvent, FC, useState, KeyboardEvent} from "react";
 import s from "./ProfileStatus.module.css"
 import editPencil from "./img/editPencil.png"
 import {updateStatusTC, UserProfileType} from "../../../redux/profile-reducer";
+import {useDispatch} from "react-redux";
 
 type ProfileStatusPropsType = {
     status: string
 }
 
 export const ProfileStatus: FC<ProfileStatusPropsType> = ({status}) => {
-
+    const dispatch = useDispatch()
     const [userStatus, setUserStatus] = useState(status);
     const [editMode, setEditMode] = useState(false);
-
+    
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setUserStatus(e.currentTarget.value);
-        updateStatusTC(userStatus)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -23,8 +23,13 @@ export const ProfileStatus: FC<ProfileStatusPropsType> = ({status}) => {
         }
     }
 
-    const editModeHandler = () => {
-        setEditMode(!editMode);
+    const onBlurHandler = () => {
+        setEditMode(false);
+        dispatch(updateStatusTC(userStatus))
+    }
+
+    const onDoubleClickHandler = () => {
+        setEditMode(true);
     }
 
     return (
@@ -38,15 +43,15 @@ export const ProfileStatus: FC<ProfileStatusPropsType> = ({status}) => {
                             value={userStatus}
                             onChange={onChangeHandler}
                             onKeyPress={onKeyPressHandler}
-                            onBlur={editModeHandler}
+                            onBlur={onBlurHandler}
                             autoFocus
                         />
-                        <img onClick={editModeHandler} src={editPencil} alt="edit"/>
+                        <img onClick={onBlurHandler} src={editPencil} alt="edit"/>
                     </>
                     :
                     <>
-                        <h3>Status: <span onDoubleClick={editModeHandler}>{userStatus}</span></h3>
-                        <img onClick={editModeHandler} src={editPencil} alt="edit"/>
+                        <h3>Status: <span onDoubleClick={onDoubleClickHandler}>{userStatus}</span></h3>
+                        <img onClick={onDoubleClickHandler} src={editPencil} alt="edit"/>
                     </>
                 }
             </div>
