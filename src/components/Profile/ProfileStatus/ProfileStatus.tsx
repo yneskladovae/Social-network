@@ -12,7 +12,7 @@ export const ProfileStatus: FC<ProfileStatusPropsType> = ({status}) => {
     const dispatch = useDispatch()
     const [userStatus, setUserStatus] = useState(status);
     const [editMode, setEditMode] = useState(false);
-    
+
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setUserStatus(e.currentTarget.value);
     }

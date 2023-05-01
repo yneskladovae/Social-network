@@ -166,7 +166,7 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
     profileAPI.updateStatus(status)
         .then((response) => {
             if (response.data.resultCode === 1) {
-                dispatch(setStatusAC(response.data.statusText));
+                dispatch(setStatusAC(status));
             }
         });
 }
