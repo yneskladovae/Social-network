@@ -3,7 +3,6 @@ import {Message} from "./Message";
 import {
     addMessageActionCreator,
     InitialStateType,
-    updateNewMessageTextActionCreator
 } from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
@@ -16,8 +15,7 @@ export type MapStateToPropsType = {
 }
 
 export type MapDispatchToPropsType = {
-    addMessage: () => void
-    updateMessage: (newMessage: string) => void
+    addMessage: (newMessageBody: string) => void
 }
 
 // export const MessageContainer: React.FC<MessageContainerPropsType> = () => {
@@ -65,8 +63,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        addMessage: () => dispatch(addMessageActionCreator()),
-        updateMessage: (newMessage: string) => dispatch(updateNewMessageTextActionCreator(newMessage)),
+        addMessage: (newMessageBody: string) => dispatch(addMessageActionCreator(newMessageBody)),
     }
 }
 

@@ -1,30 +1,15 @@
-import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import React, {FC} from 'react';
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
-export const LoginForm = (props: any) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Login'} component={'input'} name={'input'}/>
-            </div>
-            <div>
-                <Field placeholder={'Password'} component={'input'} name={'password'}/>
-            </div>
-            <div>
-                <Field type={"checkbox"} component={'input'} name={'rememberMe'}/> remember me
-            </div>
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
-    );
-};
-
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
+type FormDataType = {
+    login: string
+    password: string
+    rememberMe: boolean
+}
 
 export const Login = () => {
-    const onSubmit = (formData: any) => {
-        console.log(formData)
+    const onSubmit = (values: FormDataType) => {
+        // console.log(values)
     }
     return (
         <div>
@@ -33,3 +18,23 @@ export const Login = () => {
         </div>
     );
 };
+
+const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <Field placeholder={'Login'} component={'input'} name={'login'}/>
+            </div>
+            <div>
+                <Field type="text" placeholder={'Password'} component={'input'} name={'password'}/>
+            </div>
+            <label>
+                <Field type="checkbox" component={'input'} name={'rememberMe'}/>remember me
+            </label>
+            <div>
+                <button>Login</button>
+            </div>
+        </form>
+    )
+}
+const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)

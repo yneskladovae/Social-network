@@ -5,7 +5,6 @@ import {setAuthUserData} from "./auth-reducer";
 
 export type InitialStateType = {
     postData: PostType[]
-    newPostText: string
     profile: UserProfileType
     status: string
 }
@@ -74,27 +73,19 @@ const initialState: InitialStateType = {
             date: "14:15 25.01.2023"
         },
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
 const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case 'ADD-POST': {
-            console.log(state)
-            const newPost = {
+             const newPost = {
                 id: v1(),
-                message: state.newPostText,
+                message: action.payload.newPostText,
                 likesCount: 0,
                 date: new Date().toLocaleString() + "",
             }
-            state = {...state, postData: [newPost, ...state.postData]}
-            state.newPostText = '';
-            return state;
-        }
-        case 'UPDATE-NEW-POST-TEXT': {
-            state = {...state, newPostText: action.payload.newText};
-            return state;
+            return state = {...state, postData: [newPost, ...state.postData]}
         }
         case 'SET-USER-PROFILE': {
             state = {...state, profile: action.payload.profile};
@@ -103,27 +94,19 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
         case 'SET-STATUS': {
             return {...state, status: action.payload.status};
         }
-
     }
     return state;
 }
 
 export type ActionsTypes = ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatusAC>
 
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPostText: string) => {
     return {
         type: "ADD-POST",
-    } as const
-}
-
-export const updateNewPostTextActionCreator = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-POST-TEXT",
         payload: {
-            newText
+            newPostText
         }
     } as const
 }
@@ -170,6 +153,5 @@ export const updateStatusTC = (status: string) => (dispatch: Dispatch) => {
             }
         });
 }
-
 
 export default profileReducer;

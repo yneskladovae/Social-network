@@ -13,10 +13,9 @@ export type MessageType = {
 export type InitialStateType = {
     dialogsData: DialogsType[]
     messagesData: MessageType[]
-    newMessageText: string
 }
 
-const initialState: InitialStateType  = {
+const initialState: InitialStateType = {
     dialogsData: [
         {id: v1(), name: 'Dimych'},
         {id: v1(), name: 'Anna'},
@@ -28,7 +27,6 @@ const initialState: InitialStateType  = {
     messagesData: [
         {id: v1(), message: 'Hello, she didn’t do anything and rested all day, how are you?'},
     ],
-    newMessageText: '',
 }
 
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
@@ -36,32 +34,20 @@ const dialogsReducer = (state: InitialStateType = initialState, action: ActionsT
         case 'ADD-MESSAGE':
             const newMessage = {
                 id: v1(),
-                message: state.newMessageText,
+                message: action.payload.newMessageBody,
             }
-            state = {...state, messagesData: [...state.messagesData, newMessage]}
-            state.newMessageText = "";
-            return state;
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            state = {...state, newMessageText: action.payload.newText}
-            return state;
+            return state = {...state, messagesData: [...state.messagesData, newMessage]}
     }
     return state;
 }
 
 export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageTextActionCreator>
 
-export const addMessageActionCreator = () => {
+export const addMessageActionCreator = (newMessageBody: string) => {
     return {
         type: "ADD-MESSAGE",
-    } as const
-}
-
-export const updateNewMessageTextActionCreator = (newText: string) => {
-    return {
-        type: "UPDATE-NEW-MESSAGE-TEXT",
         payload: {
-            newText
+            newMessageBody
         }
     } as const
 }
