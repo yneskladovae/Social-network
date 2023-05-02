@@ -20,6 +20,7 @@ export const ProfileStatus: FC<ProfileStatusPropsType> = ({status}) => {
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
             setEditMode(false);
+            dispatch(updateStatusTC(userStatus))
         }
     }
 

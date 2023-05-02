@@ -116,5 +116,5 @@ export default compose<ComponentType>(
 )(ProfileContainer)
 
 // const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-//
+
 // export default connect(mapStateToProps, {setUserProfile, getUserProfile})(AuthRedirectComponent);
