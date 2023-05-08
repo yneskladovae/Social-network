@@ -37,7 +37,7 @@ export const Posts: FC<PostPropsType> = ({profilePage, addPost}) => {
     );
 };
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength100 = maxLengthCreator(100)
 
 export const AddNewPostForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
     return (
@@ -46,8 +46,8 @@ export const AddNewPostForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmi
                  name={'newPostText'}
                  component={Textarea}
                  placeholder="Whats in your mind today?"
-                 className={s.content__textarea}
-                 validate={[requiredField, maxLength10]}
+                 className={'s.content__textarea'}
+                 validate={[requiredField, maxLength100]}
              />
             <button className={s.content__textarea__btn}>Public</button>
         </form>

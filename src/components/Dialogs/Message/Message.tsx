@@ -5,6 +5,8 @@ import {MyMessage} from "./MyMessage/MyMessage";
 import {InitialStateType} from "../../../redux/dialogs-reducer";
 import {Dialog} from "../Dialog/Dialog";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormsControls/FormsControls";
+import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
 
 export type MessagePropsType = {
     dialogsPage: InitialStateType
@@ -63,10 +65,19 @@ export const Message: FC<MessagePropsType> = ({dialogsPage, addMessage}) => {
     )
 }
 
+
+const maxLength100 = maxLengthCreator(100)
+
 export const AddMessageForm: FC<InjectedFormProps<FormDataType>> = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit} className={s.sendForm}>
-            <Field component={'textarea'} name={'newMessageBody'} placeholder={"Type your message"} className={s.textarea}/>
+            <Field
+                component={Textarea}
+                name={'newMessageBody'}
+                placeholder={"Type your message"}
+                className={s.textarea}
+                validate={[requiredField, maxLength100]}
+            />
             <button className={s.button}>Send</button>
         </form>
     )
