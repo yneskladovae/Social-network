@@ -12,6 +12,14 @@
     resize: none;
 }
 
+.hasErrorStyles {
+    border: 2px solid #e6baad;
+}
+
+.textarea span {
+    color: #e6baad;
+}
+
 .content__title {
     margin: 0 0 20px 0;
     font-weight: 700;

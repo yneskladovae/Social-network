@@ -3,6 +3,8 @@ import s from "./Posts.module.css"
 import {Post} from "./Post/Post";
 import {InitialStateType} from "../../../redux/profile-reducer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
 export type PostPropsType = {
     profilePage: InitialStateType
@@ -35,14 +37,17 @@ export const Posts: FC<PostPropsType> = ({profilePage, addPost}) => {
     );
 };
 
+const maxLength10 = maxLengthCreator(10)
+
 export const AddNewPostForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
              <Field
                  name={'newPostText'}
-                 component={'textarea'}
+                 component={Textarea}
                  placeholder="Whats in your mind today?"
                  className={s.content__textarea}
+                 validate={[requiredField, maxLength10]}
              />
             <button className={s.content__textarea__btn}>Public</button>
         </form>
