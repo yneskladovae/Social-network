@@ -9,11 +9,11 @@
     z-index: 2;
 }
 
-.header h1 img{
+.header h1 img {
     margin-right: 8px;
 }
 
-.header__logo{
+.header__logo {
     display: flex;
     align-items: center;
     font-family: 'Sen', sans-serif;
@@ -24,6 +24,9 @@
     line-height: 16px;
     margin: 0;
     padding: 10px 0;
+}
 
-
+.headerLogin {
+    display: flex;
+    align-items: center;
 }

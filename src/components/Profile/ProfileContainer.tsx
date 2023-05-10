@@ -69,7 +69,8 @@ type ProfileContainerPropsType = {
     status: string
     getUserProfile: (currUserId: string | 28468) => void
     getStatusTC: (userId: string | 28468) => void
-    // isAuth: boolean
+    isAuth: boolean
+    authorizedUserId: number | null
 }
 
 interface RouteParams {
@@ -101,13 +102,14 @@ export type MapStateToPropsType = {
     profile: UserProfileType
     isAuth: boolean
     status: string
+    authorizedUserId: number | null
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth,
-    status: state.profilePage.status
-
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.id,
 });
 
 export default compose<ComponentType>(

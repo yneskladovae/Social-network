@@ -22,9 +22,10 @@ export const Header: React.FC<HeaderPropsType> = ({isAuth, login, logout}) => {
             </div>
             <div className={s.header__login}>
                 {isAuth
-                    ? <div>
-                        {login} -
-                        <button onClick={logout ? logout : () => {}}>Log out</button>
+                    ? <div className={s.headerLogin}>
+                        {login}
+                        {/*<button onClick={logout ? logout : () => {}}>Log out</button>*/}
+                        <img onClick={logout ? logout : () => {}} src={loginIcon} alt="logout"/>
                     </div>
                     : <NavLink to={'/login'}>
                         <img src={loginIcon} alt="login"/>

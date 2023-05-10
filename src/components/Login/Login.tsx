@@ -28,7 +28,7 @@ const Login: FC<LoginPropsType> = ({login, isAuth}) => {
     }
 
     if (isAuth) {
-        return <Redirect to={'/profile'} />
+        return <Redirect to={'/profile'}/>
     }
     return (
         <div>
@@ -43,7 +43,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({isAuth: st
 
 export default connect(mapStateToProps, {login})(Login)
 
-const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
+const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -63,6 +63,11 @@ const LoginForm: FC<InjectedFormProps<FormDataType>> = ({handleSubmit}) => {
                     validate={[requiredField]}
                 />
             </div>
+            {error && (
+                <div style={{color: '#e6baad'}}>
+                    {error}
+                </div>)
+            }
             <label>
                 <Field type="checkbox" component={Input} name={'rememberMe'}/>remember me
             </label>

@@ -2,6 +2,7 @@ import {AnyAction, Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppStateType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 export type InitialStateType = {
     id: number | null
@@ -52,15 +53,17 @@ export const getAuthUserData = () => {
     }
 }
 
-export const login = (email: string, password: string, rememberMe: boolean = false) => {
-    return (dispatch: ThunkDispatch<AppStateType, unknown, AnyAction>) => {
-        authAPI.login(email, password, rememberMe = false)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(getAuthUserData())
-                }
-            })
-    }
+export const login = (email: string, password: string, rememberMe: boolean = false) => (dispatch: ThunkDispatch<AppStateType, unknown, AnyAction>) => {
+    authAPI.login(email, password, rememberMe = false)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthUserData())
+            } else {
+                const message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+                dispatch(stopSubmit('login', {_error: message}))
+            }
+        })
+
 }
 
 export const logout = () => {
