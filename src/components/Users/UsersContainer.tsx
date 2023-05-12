@@ -20,7 +20,6 @@ import {
     getUsersSelector
 } from "../../redux/users-selectors";
 
-
 export type MapStateToPropsType = {
     usersPage: UsersType[]
     pageSize: number
@@ -155,5 +154,4 @@ export default compose<ComponentType>(
         unfollowThunkCreator
     }),
     withAuthRedirect
-)
-(UsersContainer)
+)(UsersContainer)
