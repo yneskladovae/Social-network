@@ -5,7 +5,7 @@ import {requiredField} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
-import {AppStateType} from "../../redux/redux-store";
+import {AppRootStateType} from "../../redux/redux-store";
 
 type MapStatePropsType = {
     isAuth: boolean
@@ -39,7 +39,7 @@ const Login: FC<LoginPropsType> = ({login, isAuth}) => {
 };
 
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => ({isAuth: state.auth.isAuth})
+const mapStateToProps = (state: AppRootStateType): MapStatePropsType => ({isAuth: state.auth.isAuth})
 
 export default connect(mapStateToProps, {login})(Login)
 

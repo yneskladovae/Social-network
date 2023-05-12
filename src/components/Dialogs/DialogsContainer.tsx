@@ -1,7 +1,7 @@
 import React, {ComponentType} from "react";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
-import {AppStateType} from "../../redux/redux-store";
+import {AppRootStateType} from "../../redux/redux-store";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {ProfileContainer} from "../Profile/ProfileContainer";
 import {compose} from "redux";
@@ -12,7 +12,7 @@ export type MapStateToPropsType = {
     isAuth: boolean
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth
     }

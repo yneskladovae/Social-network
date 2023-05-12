@@ -33,7 +33,7 @@ const initialState: InitialStateType = {
     followingInProgress: []
 }
 
-export type ActionsTypes =
+export type UsersActionsType =
     ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
@@ -42,7 +42,7 @@ export type ActionsTypes =
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof toggleFollowingProgress>
 
-const usersReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: UsersActionsType): InitialStateType => {
     switch (action.type) {
         case "FOLLOW": {
             return {

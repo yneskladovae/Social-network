@@ -6,7 +6,7 @@ import {
 } from "../../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {AppStateType} from "../../../redux/redux-store";
+import {AppRootStateType} from "../../../redux/redux-store";
 
 
 export type MapStateToPropsType = {
@@ -54,7 +54,7 @@ export type MapDispatchToPropsType = {
 //     </StoreContext.Consumer>
 // }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
         isAuth: state.auth.isAuth

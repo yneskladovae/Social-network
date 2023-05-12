@@ -54,7 +54,7 @@ import React, {ComponentType, useEffect} from "react";
 import {connect} from "react-redux";
 import {Redirect, useParams} from "react-router-dom";
 import {Profile} from "./Profile";
-import {AppStateType} from "../../redux/redux-store";
+import {AppRootStateType} from "../../redux/redux-store";
 import {
     getStatusTC,
     getUserProfile,
@@ -105,7 +105,7 @@ export type MapStateToPropsType = {
     authorizedUserId: number | null
 }
 
-let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     isAuth: state.auth.isAuth,
     status: state.profilePage.status,

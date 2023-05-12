@@ -37,7 +37,7 @@ const initialState: InitialStateType = {
     ]
 }
 
-const sidebarReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
+const sidebarReducer = (state: InitialStateType = initialState, action: SidebarActionType): InitialStateType => {
     switch (action.type) {
         case 'FRIENDS-SIDEBAR':
             return state;
@@ -45,7 +45,7 @@ const sidebarReducer = (state: InitialStateType = initialState, action: ActionsT
     return state;
 }
 
-export type ActionsTypes = ReturnType<typeof sidebarActionCreator>
+export type SidebarActionType = ReturnType<typeof sidebarActionCreator>
 
 export const sidebarActionCreator = () => {
     return {
