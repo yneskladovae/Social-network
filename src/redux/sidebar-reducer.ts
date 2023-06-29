@@ -1,10 +1,11 @@
 import {v1} from "uuid";
-import u1 from "./img/u1.png";
-import u2 from "./img/u2.png";
-import u3 from "./img/u3.png";
-import u4 from "./img/u4.png";
-import u5 from "./img/u5.png";
-import u6 from "./img/u6.png";
+import u1 from "../assets/img/u1.png";
+import u2 from "../assets/img/u2.png";
+import u3 from "../assets/img/u3.png";
+import u4 from "../assets/img/u4.png";
+import u5 from "../assets/img/u5.png";
+import u6 from "../assets/img/u6.png";
+
 
 export type InitialStateType = {
     sidebarData: SidebarDataType[]

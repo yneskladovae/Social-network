@@ -7,6 +7,7 @@ import {Dialog} from "../Dialog/Dialog";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormsControls/FormsControls";
 import {maxLengthCreator, requiredField} from "../../../utils/validators/validators";
+import myMessage from '../../../../assets/img/u4.png'
 
 export type MessagePropsType = {
     dialogsPage: InitialStateType
